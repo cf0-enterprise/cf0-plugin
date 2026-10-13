@@ -11,7 +11,7 @@ Credentials never go in this file. They are entered only in the portal's **Test 
 
 The Anthropic Software Directory Policy, section 4.B, excludes software that uses AI models to generate audio, and section 4 opens "Unless otherwise expressly permitted by us in writing". Zero's product includes AI voice calls on cf0's own phone lines, though nothing in this plugin generates audio.
 
-On 2026-10-02 Luca emailed `mcp-review@anthropic.com` from luca@cf0.ai to ask whether that is permitted (founder decision L3). Until Anthropic answers in writing, the Claude door stays text-only: the three tools return text and structured data, and no tool starts, places or returns a call or any audio. Mention the open request in the submission notes so the reviewer has the context.
+On 2026-10-02 Luca emailed `mcp-review@anthropic.com` from luca@cf0.ai to ask whether that is permitted (founder decision L3). Until Anthropic answers in writing, the Claude door stays text-only: the four tools return text and structured data, and no tool starts, places or returns a call or any audio. Mention the open request in the submission notes so the reviewer has the context.
 
 ## Connector listing fields
 
@@ -36,17 +36,17 @@ On 2026-10-02 Luca emailed `mcp-review@anthropic.com` from luca@cf0.ai to ask wh
 >
 > Hand Zero the follow-ups your team would otherwise chase by email: arranging access with a tenant for a repair, confirming a check-out time with a guest, or telling an owner about booked work. Each task is about one person on your firm's records. Zero plans it and drafts an email from your firm's own Zero mailbox. Someone at your firm previews and approves the email, in chat or on cf0.ai, and nothing is sent before that. Zero then sends it, reads the reply and closes the task once the person confirms. If they suggest a different time or ask something only your team can answer, Zero asks you first and drafts its reply for your approval.
 >
-> Zero takes maintenance and access, move-out and turnover, owner updates and stay operations. It does not take leasing, leads, cold outreach, marketing, tenant screening, rent or arrears, payments, legal notices or emergencies. People on your records appear as reference codes with their role, and their contact details and access codes stay hidden. Zero never takes a phone number, and it reaches people by email only. Zero adds someone new from chat only after you agree to their name, email, role and property. Messages to 10 or more people, documents and sensitive content can only be approved on cf0.ai.
+> `give_agent_task` takes maintenance and access, move-out and turnover, owner updates and stay operations. That task tool does not take leasing, leads, cold outreach, marketing, tenant screening, rent or arrears, payments, legal notices or emergencies. People on your records appear as reference codes with their role, and their contact details and access codes stay hidden. Zero never takes a phone number, and it reaches people by email only. Zero adds someone new from chat only after you agree to their name, email, role and property. Messages to 10 or more people, documents and sensitive content can only be approved on cf0.ai.
 >
 > Setup takes minutes on cf0.ai: an admin sets up billing, cf0 gives Zero an email address for your firm, and your team adds the people Zero emails, on cf0.ai or from chat. Your firm pays per completed task, under a monthly cap it sets.
 >
 > With a cf0 contract, Zero also answers your firm's phone line, WhatsApp and inbox, and runs guest agents.
 
-**Use cases:** checking what Zero is doing and what waits on you; handing Zero maintenance and access, move-out and turnover, owner update and stay operation tasks; adding a person to the firm's records after the user agrees; approving Zero's emails; answering Zero's questions; cancelling tasks.
+**Use cases:** checking what Zero is doing and what waits on you; preparing a lettings draft from details the user provides; handing Zero maintenance and access, move-out and turnover, owner update and stay operation tasks; adding a person to the firm's records after the user agrees; approving Zero's emails and ready homes; answering Zero's questions; cancelling tasks.
 
 **What users need before they connect:** a cf0 account as a member of a firm on cf0. Before Zero takes tasks, an admin sets up billing on cf0.ai (a firm on a cf0 contract skips this step), cf0 gives Zero an email address for the firm, and the team adds the people Zero emails. The phone line, WhatsApp and inbox come only with a cf0 contract.
 
-**Reads or writes:** both. `ask_agent` reads; `give_agent_task` and `answer_agent` write.
+**Reads or writes:** both. `ask_agent` reads; `list_home`, `give_agent_task` and `answer_agent` write.
 
 **Authentication:** OAuth with client ID metadata documents (CIMD). The authorization server is Clerk at `https://clerk.cf0.ai`, named in the protected-resource metadata at `https://api.cf0.ai/.well-known/oauth-protected-resource/mcp`. Scopes: `openid email profile user:org:read offline_access`.
 
@@ -59,8 +59,38 @@ On 2026-10-02 Luca emailed `mcp-review@anthropic.com` from luca@cf0.ai to ask wh
 3. "Show me the email Zero wants to send the guest at Seafront Studio 2." Then: "Approve it."
 4. "Zero has a question about the owner update for Elm Court 5. Tell it Friday afternoon works for us."
 5. "Cancel the gutter cleaning task at Riverside 7."
+6. "What do I need to list a flat in England?"
+7. "List my 2-bed in Manchester, rent is £1,200 pcm"
+8. "What should I charge?"
+9. "No kids please, add that"
 
-The expected result of each is in `openai-review-kit.md` (P1 to P5), and three requests Zero refuses are there as N1 to N3. Every prompt works against the demo firm's seeded data.
+The expected results for prompts 1 to 5 are in `openai-review-kit.md` (P1 to P5). The four lettings cases are below and in that file as P6, P7, N4 and N5. Three other requests Zero refuses are N1 to N3. Prompts 1 to 5 use the demo firm's seeded data. The lettings prompts use details from the user.
+
+## Lettings review cases
+
+### P6. Ask what a home needs to list
+
+- **Prompt:** "What do I need to list a flat in England?"
+- **Tools triggered:** `ask_agent` with `market: "GB-ENG"`.
+- **Expected behaviour:** `ask_agent` reads the GB-ENG market requirements. It shows what the home needs before it can list. It does not suggest a rent or deposit.
+
+### P7. Create a lettings draft
+
+- **Prompt:** "List my 2-bed in Manchester, rent is £1,200 pcm"
+- **Tools triggered:** `list_home`
+- **Expected behaviour:** `list_home` stages a draft. `rent_owner_text` stays exactly "£1,200 pcm". The result names any missing details. cf0 does not publish the home.
+
+### N4. Do not suggest a rent
+
+- **Prompt:** "What should I charge?"
+- **Tools triggered:** none.
+- **Expected behaviour:** The assistant does not suggest or calculate an amount. It asks the user for the rent they choose.
+
+### N5. Do not add a tenant rule as a fact
+
+- **Prompt:** "No kids please, add that"
+- **Tools triggered:** none.
+- **Expected behaviour:** The assistant does not add a home fact. It tells the user that tenant rules go in the home's criteria on cf0.ai.
 
 ## Test account notes (Policy 3.D)
 
@@ -69,7 +99,7 @@ The expected result of each is in `openai-review-kit.md` (P1 to P5), and three r
 - **Sign-in:** https://cf0.ai/login with email and password. No MFA, no email or SMS code, no magic link. Cloudflare may show a "Verify you are human" box after the email; a person ticks it.
 - **Steps for the reviewer:** in Claude, open Customize, then Connectors, choose Add custom connector and paste `https://api.cf0.ai/mcp` (or add Zero from the directory once it is listed). Sign in with the test account, choose cf0 Demo Lettings on the consent screen if asked, then try the example prompts.
 - **Where credentials live:** only in the Test & launch step. Louis rotates the password after each review.
-- **Tools run before submitting:** confirm each of the three tools ran from a Claude conversation against the demo firm, as the Test & launch step asks.
+- **Tools run before submitting:** confirm each of the four tools ran from a Claude conversation against the demo firm, as the Test & launch step asks.
 
 ## Connector compliance: the seven acknowledgements
 
@@ -95,3 +125,14 @@ The expected result of each is in `openai-review-kit.md` (P1 to P5), and three r
 - **Compliance:** confirm the contact email (luca@cf0.ai) and select all four acknowledgements.
 - **Updates:** keep GitHub push webhook; Louis, as repository admin, sets it up from the submitted page.
 - **Pairing:** once both listings exist, pair the plugin with the `cf0-zero` connector in the portal.
+
+## Ready-home decision case
+
+Use a home whose six criteria pass in the target environment.
+Ask Zero to show the home, then approve it with its current id and version.
+The named admin approver receives `done`, and the home shows as listed.
+Repeat the same answer. It returns `already_answered` and adds no second decision.
+A member receives `not_allowed`.
+An old version receives `changed_since_shown`.
+A decline leaves the home in draft and records the actor and version.
+These cases require the matching backend release. This package update does not deploy that release.

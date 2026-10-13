@@ -1,9 +1,9 @@
 # OpenAI review kit: Zero
 
-What the ChatGPT plugin submission asks for, and why. The five positive and three negative cases, the countries and the release notes are also in `plugin.json`, so the ZIP upload imports them; this file is their source. Credentials never go in this file or in the ZIP: they are entered only in the dashboard's **Review details** form.
+What the ChatGPT plugin submission asks for, and why. The five baseline positive and three baseline negative cases, the countries and the release notes are also in `plugin.json`, so the ZIP upload imports them. The lettings cases below extend those cases. Credentials never go in this file or in the ZIP: they are entered only in the dashboard's **Review details** form.
 
 - Plugin: `cf0-zero`, display name "Zero", one MCP server at `https://api.cf0.ai/mcp`.
-- Tools: `ask_agent`, `give_agent_task`, `answer_agent`.
+- Tools: `ask_agent`, `give_agent_task`, `answer_agent`, `list_home`.
 - Support page: https://cf0.ai/support#assistants
 
 ## Demo data the cases rely on
@@ -25,7 +25,7 @@ Seeded items on the board:
 - **T3**: an open task "Arrange gutter cleaning access with the tenant at Riverside 7".
 - **A2**: a lift maintenance notice to all 15 Elm Court residents, waiting for approval. It reaches 10 or more people, so it can only be approved on cf0.ai.
 
-## Positive test cases (5)
+## Positive test cases (7)
 
 ### P1. What is waiting on me
 
@@ -58,7 +58,19 @@ Seeded items on the board:
 - **Tools triggered:** `ask_agent`, then `answer_agent`
 - **Expected behaviour:** `ask_agent` finds task T3 and its version code. `answer_agent` cancels it and returns `done`. The task shows as cancelled on cf0.ai/app/tasks and Zero sends nothing further about it.
 
-## Negative test cases (3)
+### P6. Ask what a home needs to list
+
+- **Prompt:** "What do I need to list a flat in England?"
+- **Tools triggered:** `ask_agent` with `market: "GB-ENG"`
+- **Expected behaviour:** `ask_agent` reads the GB-ENG market requirements. It shows what the home needs before it can list. It does not suggest a rent or deposit.
+
+### P7. Create a lettings draft
+
+- **Prompt:** "List my 2-bed in Manchester, rent is £1,200 pcm"
+- **Tools triggered:** `list_home`
+- **Expected behaviour:** `list_home` stages a draft. `rent_owner_text` stays exactly "£1,200 pcm". The result names any missing details. cf0 does not publish the home.
+
+## Negative test cases (5)
 
 ### N1. Leads and marketing
 
@@ -78,11 +90,24 @@ Seeded items on the board:
 - **Why it must not complete:** Messages to 10 or more people can only be approved by someone at the firm on cf0.ai, never from an assistant.
 - **Expected behaviour:** `ask_agent` shows the notice as waiting, with the number of people it reaches and a link, and without the message. `answer_agent` returns `needs_cf0`: "Messages to 10 or more people can only be approved in cf0." with an `open_in_cf0` link. The notice stays pending and no resident receives anything.
 
+### N4. Do not suggest a rent
+
+- **Prompt:** "What should I charge?"
+- **Why it must not complete:** Zero must not suggest or calculate a rent.
+- **Expected behaviour:** The assistant does not suggest or calculate an amount. It asks the user for the rent they choose.
+
+### N5. Do not add a tenant rule as a fact
+
+- **Prompt:** "No kids please, add that"
+- **Why it must not complete:** Tenant rules belong in the home's criteria on cf0.ai, not in home facts.
+- **Expected behaviour:** The assistant does not add a home fact. It tells the user that tenant rules go in the home's criteria on cf0.ai.
+
 ## Tool annotations and justifications
 
 | Tool | readOnlyHint | destructiveHint | openWorldHint | idempotentHint | Justification |
 |---|---|---|---|---|---|
 | `ask_agent` | true | false | false | true | Reads the signed-in user's own firm workspace in cf0 and writes nothing. Contacts no one. |
+| `list_home` | false | false | false | true | Stages or updates a draft. Reusing the same `request_id` returns the same draft. It does not publish a home. |
 | `give_agent_task` | false | true | true | false | Puts a task on the firm's board and leads to an email to one person outside the firm once approved. The same task given twice in a day returns the first, but the first call does create work. |
 | `answer_agent` | false | true | true | true | Approving releases an email to a person outside the firm and cannot be undone; cancelling stops a task. Bound to the version code the user was shown, so a repeat changes nothing. |
 
@@ -98,7 +123,7 @@ About four minutes, recorded in ChatGPT on the web with the reviewer account. Th
 6. **2:30 to 2:55. P4.** Answer Zero's question; show the reply waiting for approval in cf0.
 7. **2:55 to 3:15. P5.** Cancel the Riverside 7 task; show it cancelled on the board.
 8. **3:15 to 3:50. N1 to N3.** The Zillow leads refusal, the phone number refusal, and the 15-person notice sent to cf0.ai.
-9. **3:50 to 4:00. Close.** "Zero's work stays on the firm's board in cf0, and anything beyond an ordinary email is approved on cf0.ai."
+9. **3:50 to 4:00. Close.** "Zero's work stays on the firm's board in cf0, and sensitive messages and documents need approval on cf0.ai."
 
 Upload the recording somewhere the reviewer can open without signing in, and paste its URL as the demo recording URL.
 
@@ -126,3 +151,14 @@ AT,BE,BG,CY,CZ,DE,DK,EE,ES,FI,FR,GR,HR,HU,IE,IT,LT,LU,LV,MT,NL,PL,PT,RO,SE,SI,SK
 - EEA outside the EU: IS LI NO
 - UK: GB. US: US. Canada: CA
 - Asia: SG MY ID PH IN JP KR TH. These are the Asian markets named in cf0's 2026-10-01 market research (the WhatsApp go-live order and the PDPA, APPI, DPDP and PIPA law list). Mainland China is out.
+
+## Ready-home decision case
+
+Use a home whose six criteria pass in the target environment.
+Ask Zero to show the home, then approve it with its current id and version.
+The named admin approver receives `done`, and the home shows as listed.
+Repeat the same answer. It returns `already_answered` and adds no second decision.
+A member receives `not_allowed`.
+An old version receives `changed_since_shown`.
+A decline leaves the home in draft and records the actor and version.
+These cases require the matching backend release. This package update does not deploy that release.

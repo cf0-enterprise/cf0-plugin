@@ -5,17 +5,18 @@ description: Work with Zero, your firm's AI property manager in cf0. Use it when
 
 # Zero, your AI property manager
 
-Zero is the AI property manager of the user's firm in cf0, an AI employee that does the firm's follow-ups. Its work lives on the firm's task board in cf0, with the same approvals and the same record of what it sent. These three tools are the only way to reach it from here.
+Zero is the AI property manager of the user's firm in cf0, an AI employee that does the firm's follow-ups. Its work lives on the firm's task board in cf0, with the same approvals and the same record of what it sent. These four tools are the only way to reach it from here.
 
 | Tool | What it does | Changes anything? |
 |---|---|---|
-| `ask_agent` | Reads Zero's board: its tasks, the actions waiting for approval and the questions Zero asked the user | No. It contacts no one |
+| `ask_agent` | Reads Zero's board, homes and listing requirements | No. It contacts no one |
 | `give_agent_task` | Hands Zero one task about one person: someone on the firm's records, or someone new that the user agrees to add | Yes. Zero puts it on the board and drafts one email |
-| `answer_agent` | Approves or declines a proposed action, answers Zero's question, or cancels a task | Yes |
+| `answer_agent` | Approves or declines a proposed action or home, answers Zero's question, or cancels a task | Yes |
+| `list_home` | Writes a draft home for lettings on cf0 from what the user says | Yes. It writes a draft only. It never publishes |
 
 ## What the plugin covers
 
-With the plugin, Zero works the follow-ups that staff hand it, by email from the firm's own Zero address: access for repairs, check-out times, owner updates, move-out and turnover. Staff approve each email.
+With the plugin, Zero works the follow-ups that staff hand it, by email from the firm's own Zero address: access for repairs, check-out times, owner updates, move-out and turnover. Staff approve each email. Owners can also read their homes, prepare drafts and decide whether a ready home can list.
 
 The plugin does not answer the firm's phone line, WhatsApp or inbox, and it does not run guest agents. Those come with a cf0 contract and are set up on cf0.ai. If the user asks for them, say so, and give the link https://cf0.ai/support#assistants, which compares the plugin and a cf0 contract.
 
@@ -42,7 +43,7 @@ Use `give_agent_task` when the user wants Zero to do something with one person.
 
 If the user names someone only by email address, ask for their name on the firm's records. If they are not on the records, offer to add them with `new_person`.
 
-Zero takes four kinds of work: maintenance and access, move-out and turnover, owner updates, and stay operations. It does not take leasing, leads, cold outreach, marketing, tenant screening, rent or arrears, payments, legal notices or emergencies. If the user's request is one of those, tell them Zero does not do it rather than rewording it to fit. In an emergency, tell the user to call the emergency services and their firm's emergency line now.
+`give_agent_task` takes four kinds of work: maintenance and access, move-out and turnover, owner updates, and stay operations. It does not take leasing, leads, cold outreach, marketing, tenant screening, rent or arrears, payments, legal notices or emergencies. If the user's request is one of those, tell them `give_agent_task` does not take it rather than rewording it to fit. In an emergency, tell the user to call the emergency services and their firm's emergency line now.
 
 For work involving several people, give one task per person. Giving the same task again on the same day returns the first task.
 
@@ -59,12 +60,12 @@ The result's `status` says what happened:
 
 Use `answer_agent` only for an item the user has seen in Zero's latest answer, and only with the decision the user stated.
 
-- `item_kind`: `approval`, `question` or `task`.
+- `item_kind`: `approval`, `question`, `task` or `listing`.
 - `item_id` and `version`: from that answer, unchanged.
 - `decision`: `approve`, `decline`, `change` or `cancel`.
 - `message`: the user's own words. Required for `change`, and for a question that asks what Zero should tell the person.
 
-Before an approval, show the user the item's preview in full: the person's role and reference code, the property, the send time in your firm's time zone and the full message. Ask the user to confirm. Zero sends an approved email within 10 minutes, after the email passes its send checks.
+Before an email approval, show the user the item's preview in full: the person's role and reference code, the property, the send time in your firm's time zone and the full message. Ask the user to confirm. Zero sends an approved email within 10 minutes, after the email passes its send checks.
 
 Questions take `approve` (agree, or yes), `decline` (no) or `change` (the user's own answer). Zero then writes its reply to the person, and that reply waits for approval like any other email.
 
@@ -78,6 +79,17 @@ The result's `status`:
 - `not_allowed`: the user cannot answer this item, for example because only an admin or a named approver can approve. Show the `result`.
 - `already_answered`: someone already answered it. Show the `result`.
 - `try_again`: offer to try again in a minute.
+
+## Lettings: homes to let
+
+- Use `ask_agent` to read the user's homes on cf0, the status and the next step of each home, and what a home still needs before it can list. Pass `market` (for example `GB-ENG` for England) when the user asks what they need to list a home in a place. If the answer says "cf0 does not list there yet", tell the user that.
+- Use `list_home` when the user wants to let a home or add details to a draft. Pass `draft_id` from the last result to add to the same draft.
+- Put the rent and the deposit in `rent_owner_text` and `deposit_owner_text` exactly as the user typed them. Never suggest, round, convert or compute a rent or a deposit. If the user did not give one, leave it out and ask the user.
+- If `list_home` refuses a deposit above the market cap, show the value, the cap and the rule as written. Do not offer a lower amount.
+- Some acts happen only on cf0.ai: the ownership proof, the photo rights, the lettings terms and the named approver. Show the `open_in_cf0` links for them. Do not say that a home is listed until `ask_agent` shows it as listed.
+- Never ask about a renter's children, age, benefits, nationality or immigration status. Neutral occupancy limits and other permitted tenant rules go in criteria on cf0.ai, not in facts.
+- "Approve and list" in `answer_agent` takes the user's own decision only. Show the ready home and its money first. Only the named admin approver can decide. A decline records the decision and leaves the home in draft.
+- Pass `request_id` when you call `list_home`. Reuse the same value if you retry. Pass any draft fields the user gives: `layout_name`, `private_label`, `available_from`, `min_term_months` and `timezone`. If the result includes `missing_details`, ask the user for those details.
 
 ## Ground rules
 

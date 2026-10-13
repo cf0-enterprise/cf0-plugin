@@ -10,11 +10,12 @@ Every task stays on your firm's board in cf0, with a record of what Zero sent an
 
 ## What it does
 
-- **Ask Zero** (`ask_agent`, read-only): what Zero is handling, what is waiting on you, and where a task stands. It changes nothing and contacts no one.
+- **Ask Zero** (`ask_agent`, read-only): what Zero is handling, what is waiting on you, and where a task stands. It also reads your homes and their listing requirements. It changes nothing and contacts no one.
+- **Prepare a lettings draft** (`list_home`): write a draft home from the details the user gives. It never publishes the home.
 - **Give Zero a task** (`give_agent_task`): hand Zero one task about one person on your firm's records, or about someone new that you agree to add, such as arranging access with a tenant for a repair visit, confirming a check-out time with a guest or telling an owner about booked work. Zero drafts one email from your firm's own Zero mailbox and sends it only after someone at your firm approves it.
-- **Answer Zero** (`answer_agent`): approve or decline an ordinary email after a preview, answer a question Zero asked about your task, or cancel a task.
+- **Answer Zero** (`answer_agent`): approve or decline an ordinary email after a preview, answer a question Zero asked about your task, cancel a task, or approve or decline a home after the listing checks pass.
 
-People on your firm's records appear as reference codes such as `p_k7mq2xrb4a` with their role, and contact details and access codes are hidden. A name that is not on your firm's records, such as one typed into the chat, is passed back as written. Zero never takes leasing, leads, cold outreach, marketing, tenant screening, rent or arrears, payments, legal notices or emergencies. Messages to 10 or more people, documents and sensitive content can only be approved on cf0.ai.
+People on your firm's records appear as reference codes such as `p_k7mq2xrb4a` with their role, and contact details and access codes are hidden. A name that is not on your firm's records, such as one typed into the chat, is passed back as written. `give_agent_task` never takes leasing, leads, cold outreach, marketing, tenant screening, rent or arrears, payments, legal notices or emergencies. Messages to 10 or more people, documents and sensitive content can only be approved on cf0.ai.
 
 ## What is in this package
 
@@ -22,7 +23,7 @@ People on your firm's records appear as reference codes such as `p_k7mq2xrb4a` w
 |---|---|
 | `plugin.json`, `mcp.json` | Agent Plugins manifest and MCP server for ChatGPT and Codex |
 | `.claude-plugin/plugin.json`, `.mcp.json` | Plugin manifest and MCP server for Claude |
-| `skills/zero-property-manager/SKILL.md` | How your assistant works with Zero, using the three tools |
+| `skills/zero-property-manager/SKILL.md` | How your assistant works with Zero, using the four tools |
 | `assets/` | Zero logos and composer icons, light and dark |
 | `listing/` | Directory submission material; not loaded by the plugin |
 | `scripts/` | Repository checks; not loaded by the plugin |
