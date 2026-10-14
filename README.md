@@ -13,7 +13,7 @@ Every task stays on your firm's board in cf0, with a record of what Zero sent an
 - **Ask Zero** (`ask_agent`, read-only): what Zero is handling, what is waiting on you, and where a task stands. It also reads your homes and their listing requirements. It changes nothing and contacts no one.
 - **Prepare a lettings draft** (`list_home`): write a draft home from the details the user gives. It never publishes the home.
 - **Give Zero a task** (`give_agent_task`): hand Zero one task about one person on your firm's records, or about someone new that you agree to add, such as arranging access with a tenant for a repair visit, confirming a check-out time with a guest or telling an owner about booked work. Zero drafts one email from your firm's own Zero mailbox and sends it only after someone at your firm approves it.
-- **Answer Zero** (`answer_agent`): approve or decline an ordinary email after a preview, answer a question Zero asked about your task, cancel a task, or approve or decline a home after the listing checks pass.
+- **Answer Zero** (`answer_agent`): approve or decline an ordinary email after a preview, answer a question Zero asked about your task, cancel a task, or approve or decline a home as the named admin approver after the listing checks pass.
 
 People on your firm's records appear as reference codes such as `p_k7mq2xrb4a` with their role, and contact details and access codes are hidden. A name that is not on your firm's records, such as one typed into the chat, is passed back as written. `give_agent_task` never takes leasing, leads, cold outreach, marketing, tenant screening, rent or arrears, payments, legal notices or emergencies. Messages to 10 or more people, documents and sensitive content can only be approved on cf0.ai.
 
@@ -27,6 +27,8 @@ People on your firm's records appear as reference codes such as `p_k7mq2xrb4a` w
 | `assets/` | Zero logos and composer icons, light and dark |
 | `listing/` | Directory submission material; not loaded by the plugin |
 | `scripts/` | Repository checks; not loaded by the plugin |
+
+Listing checks exclude review cases. These cases can contain rent that the owner provides.
 
 The plugin runs no local code, hooks or commands. Its one connection is the remote MCP server at `https://api.cf0.ai/mcp`, operated by cf0. When you connect, your assistant asks you to sign in with your cf0 account through OAuth. Each request then carries your question or task, and Zero answers from your firm's workspace in cf0. Nothing is sent anywhere else.
 
@@ -44,7 +46,7 @@ To talk to cf0 about a contract, book a demo at [cf0.ai](https://cf0.ai).
 
 ## Before you connect
 
-You need a cf0 account as a member of a firm on cf0. Before Zero takes tasks, an admin sets up billing on cf0.ai (a firm on a cf0 contract skips this step), cf0 gives Zero an email address for your firm, and your team adds the people Zero emails, on cf0.ai or from chat. Until then, every answer lists the steps that are missing, with a link to Setup on cf0.ai.
+You need a cf0 account as a member of a firm on cf0. Before Zero takes tasks, an admin sets up billing on cf0.ai (a firm on a cf0 contract skips this step), cf0 gives Zero an email address for your firm, and your team adds the people Zero emails, on cf0.ai or from chat. Until then, task requests list the missing setup steps. Reading homes and preparing a home draft do not need task setup.
 
 Setup steps for each assistant are at [cf0.ai/support](https://cf0.ai/support#assistants).
 

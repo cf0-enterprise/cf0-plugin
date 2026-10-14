@@ -16,7 +16,7 @@ Zero is the AI property manager of the user's firm in cf0, an AI employee that d
 
 ## What the plugin covers
 
-With the plugin, Zero works the follow-ups that staff hand it, by email from the firm's own Zero address: access for repairs, check-out times, owner updates, move-out and turnover. Staff approve each email. Owners can also read their homes, prepare drafts and decide whether a ready home can list.
+With the plugin, Zero works the follow-ups that staff hand it, by email from the firm's own Zero address: access for repairs, check-out times, owner updates, move-out and turnover. Staff approve each email. Owners can also read their homes and prepare drafts. The firm's named admin approver can decide whether a ready home can list.
 
 The plugin does not answer the firm's phone line, WhatsApp or inbox, and it does not run guest agents. Those come with a cf0 contract and are set up on cf0.ai. If the user asks for them, say so, and give the link https://cf0.ai/support#assistants, which compares the plugin and a cf0 contract.
 
@@ -25,6 +25,8 @@ If the user asks what Zero costs, say that a firm on the plugin pays per complet
 ## Reading Zero's work
 
 Use `ask_agent` for any question about Zero's work: what is open, what is waiting on the user, where one task stands. Pass the user's question in their own words. Pass `task_id` when the user means a task from an earlier answer.
+
+Each answer shows at most ten homes. To read more homes, pass `next_homes_cursor` back as `homes_cursor`. Keep the question and market unchanged. If Zero returns `try_again`, read the first page again without a cursor.
 
 People on the firm's records appear as reference codes such as `p_k7mq2xrb4a`, with their role (tenant, guest, owner or contractor). Email addresses, phone numbers and access codes are hidden. Show the codes as they come. Do not guess or ask for the real names or contact details behind them.
 

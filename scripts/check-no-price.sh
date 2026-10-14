@@ -12,7 +12,10 @@ LISTING='pays? per|per completed task|subscription|billing'
 SCOPE=(skills README.md plugin.json .claude-plugin/plugin.json)
 
 hits() {
-  (cd "$1" && grep -rEin "$PATTERN" "${SCOPE[@]}" || true) | while IFS= read -r line; do
+  local manifest
+  manifest="$(cd "$1" && jq 'del(.extensions["com.openai"].review.test_cases)' plugin.json)" || return 1
+  (cd "$1" && grep -rEin "$PATTERN" skills README.md .claude-plugin/plugin.json || true
+    printf '%s\n' "$manifest" | grep -Ein "$PATTERN" | sed 's/^/plugin.json:/' || true) | while IFS= read -r line; do
     if [[ "$line" =~ ^plugin\.json:[0-9]+:[[:space:]]*\"commerce_description\": ]] && ! grep -Eiq "$STRICT" <<<"$line"; then
       continue
     fi

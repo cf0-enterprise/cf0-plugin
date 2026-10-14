@@ -1,6 +1,6 @@
 # OpenAI review kit: Zero
 
-What the ChatGPT plugin submission asks for, and why. The five baseline positive and three baseline negative cases, the countries and the release notes are also in `plugin.json`, so the ZIP upload imports them. The lettings cases below extend those cases. Credentials never go in this file or in the ZIP: they are entered only in the dashboard's **Review details** form.
+What the ChatGPT plugin submission asks for, and why. The eight positive and five negative cases, countries and release notes are in `plugin.json`. The ZIP upload imports them. Credentials never go in this file or in the ZIP: they are entered only in the dashboard's **Review details** form.
 
 - Plugin: `cf0-zero`, display name "Zero", one MCP server at `https://api.cf0.ai/mcp`.
 - Tools: `ask_agent`, `give_agent_task`, `answer_agent`, `list_home`.
@@ -25,7 +25,7 @@ Seeded items on the board:
 - **T3**: an open task "Arrange gutter cleaning access with the tenant at Riverside 7".
 - **A2**: a lift maintenance notice to all 15 Elm Court residents, waiting for approval. It reaches 10 or more people, so it can only be approved on cf0.ai.
 
-## Positive test cases (7)
+## Positive test cases (8)
 
 ### P1. What is waiting on me
 
@@ -69,6 +69,17 @@ Seeded items on the board:
 - **Prompt:** "List my 2-bed in Manchester, rent is £1,200 pcm"
 - **Tools triggered:** `list_home`
 - **Expected behaviour:** `list_home` stages a draft. `rent_owner_text` stays exactly "£1,200 pcm". The result names any missing details. cf0 does not publish the home.
+
+### P8. Approve a ready home
+
+Use a home whose six criteria pass in the target environment.
+Ask Zero to show the home, then approve it with its current id and version.
+The named admin approver receives `done`, and the home shows as listed.
+Repeat the same answer. It returns `already_answered` and adds no second decision.
+A member receives `not_allowed`.
+An old version receives `changed_since_shown`.
+A decline leaves the home in draft and records the actor and version.
+These cases require the matching backend release. This package update does not deploy that release.
 
 ## Negative test cases (5)
 
@@ -151,14 +162,3 @@ AT,BE,BG,CY,CZ,DE,DK,EE,ES,FI,FR,GR,HR,HU,IE,IT,LT,LU,LV,MT,NL,PL,PT,RO,SE,SI,SK
 - EEA outside the EU: IS LI NO
 - UK: GB. US: US. Canada: CA
 - Asia: SG MY ID PH IN JP KR TH. These are the Asian markets named in cf0's 2026-10-01 market research (the WhatsApp go-live order and the PDPA, APPI, DPDP and PIPA law list). Mainland China is out.
-
-## Ready-home decision case
-
-Use a home whose six criteria pass in the target environment.
-Ask Zero to show the home, then approve it with its current id and version.
-The named admin approver receives `done`, and the home shows as listed.
-Repeat the same answer. It returns `already_answered` and adds no second decision.
-A member receives `not_allowed`.
-An old version receives `changed_since_shown`.
-A decline leaves the home in draft and records the actor and version.
-These cases require the matching backend release. This package update does not deploy that release.

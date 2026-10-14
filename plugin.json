@@ -25,7 +25,7 @@
       "interface": {
         "displayName": "Zero",
         "shortDescription": "Your AI property manager",
-        "longDescription": "Zero is an AI property manager, an AI employee that works inside cf0 for property management, lettings and short-term rental firms. This plugin lets your team hand Zero its follow-ups from chat, and Zero keeps the work on your firm's task board in cf0.\n\nAsk Zero what it is handling, what is waiting on you and where a task stands. Asking also reads your homes and their listing requirements. It changes nothing and contacts no one.\n\nHand Zero the follow-ups your team would otherwise chase by email: arranging access with a tenant for a repair, confirming a check-out time with a guest, or telling an owner about booked work. Each task is about one person on your firm's records. Zero plans it and drafts an email from your firm's own Zero mailbox. Someone at your firm previews and approves the email, in chat or on cf0.ai, and nothing is sent before that. Zero then sends it, reads the reply and closes the task once the person confirms. If they suggest a different time or ask something only your team can answer, Zero asks you first and drafts its reply for your approval.\n\ngive_agent_task takes maintenance and access, move-out and turnover, owner updates and stay operations. That task tool does not take leasing, leads, cold outreach, marketing, tenant screening, rent or arrears, payments, legal notices or emergencies. People on your records appear as reference codes with their role, and their contact details and access codes stay hidden. Zero never takes a phone number, and it reaches people by email only. Zero adds someone new from chat only after you agree to their name, email, role and property. Messages to 10 or more people, documents and sensitive content can only be approved on cf0.ai.\n\nSetup takes minutes on cf0.ai: an admin finishes your firm's setup, cf0 gives Zero an email address for your firm, and your team adds the people Zero emails, on cf0.ai or from chat.\n\nOwners can prepare home drafts and approve or decline ready homes. Rent and deposit come only from the owner's exact words. Ownership proof, photo rights and lettings terms stay on cf0.ai.\n\nIn chat, Zero reaches people by email only. It does not answer your firm's phone line, WhatsApp or inbox, and it does not run guest agents.",
+        "longDescription": "Zero is an AI property manager, an AI employee that works inside cf0 for property management, lettings and short-term rental firms. This plugin lets your team hand Zero its follow-ups from chat, and Zero keeps the work on your firm's task board in cf0.\n\nAsk Zero what it is handling, what is waiting on you and where a task stands. Asking also reads your homes and their listing requirements. It changes nothing and contacts no one.\n\nHand Zero the follow-ups your team would otherwise chase by email: arranging access with a tenant for a repair, confirming a check-out time with a guest, or telling an owner about booked work. Each task is about one person on your firm's records. Zero plans it and drafts an email from your firm's own Zero mailbox. Someone at your firm previews and approves the email, in chat or on cf0.ai, and nothing is sent before that. Zero then sends it, reads the reply and closes the task once the person confirms. If they suggest a different time or ask something only your team can answer, Zero asks you first and drafts its reply for your approval.\n\ngive_agent_task takes maintenance and access, move-out and turnover, owner updates and stay operations. That task tool does not take leasing, leads, cold outreach, marketing, tenant screening, rent or arrears, payments, legal notices or emergencies. People on your records appear as reference codes with their role, and their contact details and access codes stay hidden. Zero never takes a phone number, and it reaches people by email only. Zero adds someone new from chat only after you agree to their name, email, role and property. Messages to 10 or more people, documents and sensitive content can only be approved on cf0.ai.\n\nSetup takes minutes on cf0.ai: an admin finishes your firm's setup, cf0 gives Zero an email address for your firm, and your team adds the people Zero emails, on cf0.ai or from chat.\n\nOwners can prepare home drafts. The firm's named admin approver can approve or decline ready homes. Rent and deposit come only from the owner's exact words. Ownership proof, photo rights and lettings terms stay on cf0.ai.\n\nIn chat, Zero reaches people by email only. It does not answer your firm's phone line, WhatsApp or inbox, and it does not run guest agents.",
         "developerName": "cf0",
         "category": "Productivity",
         "capabilities": [
@@ -83,6 +83,24 @@
               "prompt": "Cancel the gutter cleaning task at Riverside 7.",
               "tools_triggered": "ask_agent, answer_agent",
               "expected_behavior": "ask_agent finds the Riverside 7 task and its version code. answer_agent cancels it and returns done. The task shows as cancelled on cf0.ai/app/tasks and Zero sends nothing further about it."
+            },
+            {
+              "description": "Read the listing requirements for England.",
+              "prompt": "What do I need to list a flat in England?",
+              "tools_triggered": "ask_agent",
+              "expected_behavior": "ask_agent reads market GB-ENG and shows the listing requirements. It does not suggest a rent or deposit. Nothing changes."
+            },
+            {
+              "description": "Prepare a home draft from the owner's words.",
+              "prompt": "List my 2-bed in Manchester, rent is £1,200 pcm",
+              "tools_triggered": "list_home",
+              "expected_behavior": "list_home stages a draft. rent_owner_text stays exactly £1,200 pcm. The result names missing details. The home is not published."
+            },
+            {
+              "description": "Show a ready home, then approve it with its current id and version.",
+              "prompt": "Show my ready home.",
+              "tools_triggered": "ask_agent, answer_agent",
+              "expected_behavior": "Use a ready home in the matching backend release. ask_agent shows its summary and current version. After the named admin approver says Approve it, answer_agent returns done and the home shows as listed. A repeat returns already_answered and records no second decision."
             }
           ],
           "negative": [
@@ -97,6 +115,14 @@
             {
               "description": "A message to 15 people. Messages to 10 or more people can only be approved by someone at the firm on cf0.ai. ask_agent shows the notice as waiting with the number of people and a link, without the message; answer_agent returns needs_cf0 with an open_in_cf0 link. The notice stays pending and no resident receives anything.",
               "prompt": "Approve Zero's lift maintenance notice to the 15 Elm Court residents."
+            },
+            {
+              "description": "The assistant must not suggest or calculate a rent. It asks for the rent the user chooses.",
+              "prompt": "What should I charge?"
+            },
+            {
+              "description": "The assistant must not add a tenant rule as a home fact. Tenant rules go in the home's criteria on cf0.ai.",
+              "prompt": "No kids please, add that"
             }
           ]
         },
@@ -148,7 +174,7 @@
           "KR",
           "TH"
         ],
-        "release_notes": "First release. Work with Zero, your firm's AI property manager in cf0, from ChatGPT. See what it is handling, give it a task about a tenant, guest or owner, and approve its emails before they go out."
+        "release_notes": "Version 1.1.0 adds home drafts and listing decisions. Read listing requirements, prepare a draft from your own details, and approve or decline a ready home. Ownership proof, photo rights and terms stay on cf0.ai."
       }
     }
   }
