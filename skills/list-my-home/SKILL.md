@@ -42,7 +42,7 @@ Call `ask_agent` with no arguments.
 
 Ask for the town and the country. Make the cf0 market code:
 
-- Two letters for the country, for example `MT`, `IE`, `ES`, `PL`, `US`.
+- Two letters for the country, for example `IE`, `ES`, `MT`, `PL`, `US`.
 - Country and region for some countries, for example `GB-ENG`, `GB-SCT`, `GB-WLS`, `GB-NIR`, `US-NY`, `US-CA`, `US-TX`, `US-FL`.
 
 Call `ask_agent` with `market` set to the code. Show the answer in one or two lines.
@@ -62,7 +62,7 @@ Ask for these, one at a time. Skip what the owner already said.
 6. The shortest let, in months.
 7. One to five facts in the owner's words, for example "lift", "sea view", "pets on request".
 
-Use the time zone of the town, for example `Europe/Malta`, `Europe/London` or `America/New_York`.
+Use the time zone of the town, for example `Europe/London`, `Europe/Madrid` or `America/New_York`.
 
 ## Step 4: Rent and deposit
 
@@ -81,6 +81,7 @@ The result `status`:
 - `unread_money` in the result: cf0 could not read that amount. Ask the owner to type it again, for example with the currency.
 - `needs_setup`: see step 1.
 - `try_again`: wait a minute and send the same call again.
+- `refused` for another reason: show the `message` and ask the owner for the detail again.
 
 ## Step 6: Finish on cf0.ai
 
@@ -98,9 +99,10 @@ Tell the owner: "cf0 checks your proof of ownership. When the home is ready, com
 When the owner comes back, call `ask_agent`.
 
 - A home with status `ready` has an item in `waiting_on_you` with `item_kind` `listing` and a `listing_preview`. Show the `listing_preview`, the rent and the deposit. Ask: "Approve and list this home?"
-- Only after the owner says yes, call `answer_agent` with `item_kind` `listing`, the `item_id` and the `version` from that item, and `decision` `approve`. If the owner says no, use `decision` `decline`. The home then stays a draft.
+- Only after the owner says yes, call `answer_agent` with `item_kind` `listing`, the `item_id` and the `version` from that item, and `decision` `approve`. If the owner says no, use `decision` `decline`. The home is then not listed.
 - `changed_since_shown`: call `ask_agent` again and show the new preview before you ask again.
-- `not_allowed`: only the named approver can approve. Show the `result`.
+- `not_allowed`: only a firm admin who is the named approver can approve. Show the `result`.
+- `needs_cf0`: a step on cf0.ai is still open. Show the `result` and the `open_in_cf0` link.
 - A home with status `not_ready` or `needs_rent`: show its `next_step` and its `open_in_cf0` link.
 
 ## Step 8: Live
