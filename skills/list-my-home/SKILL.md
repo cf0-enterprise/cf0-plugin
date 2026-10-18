@@ -47,7 +47,7 @@ Ask for the town and the country. Make the cf0 market code:
 
 Call `ask_agent` with `market` set to the code. Show the answer in one or two lines.
 
-- If the answer says that cf0 does not list there yet, tell the owner. The owner can still make the draft. The home waits, and it can go live when cf0 lists in that market.
+- If the answer says that cf0 does not list there yet, try the country code alone. If that answer is the same, tell the owner that cf0 does not know this place yet, and give `https://cf0.ai/list`.
 - If `list_home` later returns a refusal with the reason `market_not_found`, try the country code alone. If that also fails, tell the owner that cf0 does not know this place yet, and give `https://cf0.ai/list`.
 
 ## Step 3: The home
