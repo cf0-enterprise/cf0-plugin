@@ -1,10 +1,10 @@
 ---
 name: list-my-home
-description: Walks a home owner through listing a home to let on cf0, in four steps after the plugin is installed - a cf0 account, the home facts, the photos and the 3D scan - and ends with a listing draft that waits for approval. Uses the cf0 connector tools. Use when someone wants to let, rent out or list their flat, apartment or house on cf0, says "list my home", or asks what cf0 needs before a home can go live.
+description: Walks a home owner through listing a home to let on cf0 after the plugin is installed - a cf0 account, the home facts with the rent and the deposit, the photos and the 3D scan - and then tells the owner the steps on cf0.ai before the home goes live - the ownership proof that cf0 checks by hand, the lettings terms and the owner's approval. Uses the cf0 connector tools. Use when someone wants to let, rent out or list their flat, apartment or house on cf0, says "list my home", or asks what cf0 needs before a home can go live.
 license: MIT
 metadata:
   author: cf0
-  version: "1.3.0"
+  version: "1.4.0"
 ---
 
 # List my home on cf0
@@ -18,24 +18,28 @@ cf0 lets and manages homes. This skill takes an owner from "list my home" to a l
 | `answer_agent` | Records the owner's "approve" or "decline" for a home that is ready. |
 | `give_agent_task` | After move-in, gives Zero management work for the home. Not for listing. |
 
-If these tools are not available, the cf0 plugin or connector is not installed. Tell the owner to install it from `https://cf0.ai/list/assistant`, or to add the connector `https://api.cf0.ai/mcp`. Then start again.
+If these tools are not available, the cf0 connector is not installed. Give the owner `https://cf0.ai/list/assistant`. It shows how to add the connector `https://api.cf0.ai/mcp` in Claude (Customize > Connectors > Add custom connector) and in ChatGPT (Developer mode > Create, with OAuth). Then start again.
 
 ## The walkthrough
 
-At the start, tell the owner the four steps in one short list:
+At the start, tell the owner the steps in one short list:
 
 1. Make a cf0 account (about 1 minute).
-2. Tell me about the home (about 3 minutes).
+2. Tell me about the home, the rent and the deposit (about 3 minutes).
 3. Upload photos on cf0.ai (about 2 minutes).
 4. Do a 3D scan with the free Polycam app (about 5 minutes, optional).
+5. Send proof that you own the home on cf0.ai. cf0 checks it by hand.
+6. Read the lettings terms on cf0.ai. You accept them only if you agree.
+7. Approve the listing. It goes live only after that.
 
-Then say: "At the end, your listing draft waits for your approval. Nothing goes live before you approve it." Do the steps in this order. At the end of each step, say which step is next.
+Then say: "Nothing goes live before cf0 checks your proof and you approve the listing." Do not give a time for cf0's check. Do the steps in this order. At the end of each step, say which step is next.
 
 ## Rules for the whole flow
 
 - Ask one question at a time. Use short, plain words.
 - Rent and deposit come only from the owner. Put them in `rent_owner_text` and `deposit_owner_text` exactly as the owner typed them. Do not suggest, round, convert or calculate an amount. If the owner asks you to choose an amount, say that the owner chooses it.
-- Do not state cf0's fee or any figure for it. The fee is agreed with the owner on a call. The tenant pays nothing.
+- Do not state cf0's fee or any figure for it. The fee shows in "Lettings terms" on cf0.ai. If the owner wants to talk about the fee, cf0 agrees it with the owner on a call (support@cf0.ai). The tenant pays nothing.
+- Do not tell the owner to accept the lettings terms or to press an accept button. The owner reads the terms and decides.
 - Do not ask about a renter's children, age, benefits, nationality or immigration status. A rule about tenants is not a home fact. It goes in the home's criteria on cf0.ai.
 - Photos, scans and ownership proof go to cf0.ai, not into this chat. Do not ask the owner to paste or attach them here.
 - Do not say that the home is listed or live until `ask_agent` shows the home with status `listed`.
@@ -47,12 +51,13 @@ Then say: "At the end, your listing draft waits for your approval. Nothing goes 
 Call `ask_agent` with no arguments.
 
 - If the assistant asks the owner to sign in to cf0, tell the owner these steps, all in one message:
-  1. "Type your email and press Continue."
-  2. "cf0 sends a code to your email. Type the code."
-  3. "If you are new, tick 'I agree to the Terms of Service and Privacy Policy' and press Continue."
-  4. "Choose 'I own homes' and press Continue. Choose 'Let' and press Continue."
-  5. "In 'About you', fill in your name, phone number, country and how many homes you let. Press Finish."
-  6. "Press 'Continue to your assistant'. If the page asks if your assistant can use your cf0 account, press Allow. Then come back here."
+  1. "On the cf0 page, press Google, Microsoft or Slack to use that account. Or type your email and press Continue."
+  2. "If the page asks you to show that you are human, do the check."
+  3. "If you typed your email, cf0 sends a code to it. Type the code."
+  4. "If you are new, tick 'I agree to the Terms of Service and Privacy Policy' and press Continue."
+  5. "Choose 'I own homes' and press Continue. Choose 'Let' and press Continue."
+  6. "In 'About you', fill in your name, phone number, country and how many homes you let. Press Finish."
+  7. "Press 'Continue to your assistant'. If the page asks if your assistant can use your cf0 account, press Allow. Then come back here."
 
   Then call `ask_agent` again.
 - If the result has `status` `no_firm`, or `list_home` later returns `no_firm`: the sign-in has no cf0 account for homes yet. Give the `open_in_cf0` link. Tell the owner: "Type the town, press 'Start listing' and sign up with 'I own homes'. When the page asks about the home, come back here. I add the home with you." Then call `ask_agent` again.
@@ -84,7 +89,9 @@ Ask for these, one at a time. Skip what the owner already said.
 5. The first date the home is free (YYYY-MM-DD).
 6. The shortest let, in months.
 7. One to five facts in the owner's words, for example "lift", "sea view", "pets on request".
-8. "What rent do you want, and what deposit?" Copy the answer into `rent_owner_text` and `deposit_owner_text` with no change.
+8. "What rent do you want, and what deposit?" Copy the answer into `rent_owner_text` and `deposit_owner_text` with no change. You need both before step 3. If the owner has no deposit, ask the owner to say 0.
+
+The photo page makes the home from the draft only when the draft has the rent and the deposit. Photos attach to the home, not to the draft. Thus, if the owner does not know the rent or the deposit yet, do not give the photo link. Save the draft and tell the owner to come back with both amounts.
 
 Use the time zone of the town, for example `Europe/London`, `Europe/Madrid` or `America/New_York`.
 
@@ -96,7 +103,7 @@ Keep the `draft_id` and the `open_in_cf0` links from the result. To add or chang
 
 The result `status`:
 
-- `staged`: the draft is saved. Ask the owner for each item in `missing_details`, then call `list_home` again with the `draft_id`. An item with a dot names the `list_home` field with an underscore, for example `layout.name` is `layout_name`. When `missing_details` is empty, go to step 3.
+- `staged`: the draft is saved. Ask the owner for each item in `missing_details`, then call `list_home` again with the `draft_id`. An item with a dot names the `list_home` field with an underscore, for example `layout.name` is `layout_name`. When `missing_details` is empty, the draft has the rent and the deposit, and the result has no `unread_money`, go to step 3. `missing` always has `rent_and_deposit` and `photo_rights` for a draft. That is correct, because the photo page adds them.
 - `refused` with a deposit refusal: show the `value`, the `cap`, the `currency` and the `rule` as the result gives them. Ask the owner for a new deposit. Do not offer one.
 - `unread_money` in the result: cf0 could not read that amount. Ask the owner to type it again, for example with the currency.
 - `no_firm`: see step 1.
@@ -108,7 +115,7 @@ The result `status`:
 Give the `photo_rights` link from the last `list_home` result. Tell the owner:
 
 1. "Open the link on the device that has the photos. Sign in with the same cf0 account."
-2. "If the page shows the details of the home, check them and press 'Add the home'."
+2. "If the page shows the details of the home, check them. The rent and the deposit are already there. Press 'Add the home'."
 3. "In 'Photos', press 'Choose photos' and pick 5 to 20 photos: each room, the kitchen, the bathroom and the outside."
 4. "Tick the box that says you took the photos or may use them. Press the 'Upload' button. The page then says how many photos it added."
 5. "Come back here and say 'done'."
@@ -132,18 +139,18 @@ The scan is optional. It gives renters a 3D tour. Ask: "Do you have an iPhone 12
 
 Tell the owner that cf0 builds the 3D tour and shows it after review. Do not promise a date.
 
-## Step 5: Finish the draft
+## Step 5: Proof and terms on cf0.ai
 
-Two short items on the same page let cf0 check the home:
+Two more items on the same page come before the home can go live. Tell the owner:
 
-- "Ownership proof": choose the kind of proof, choose the file and press "Send to cf0". cf0 checks it by hand.
-- "Lettings terms": press "Accept, fee agreed on a call". The fee is agreed with the owner on a call. The tenant pays nothing.
+- "Ownership proof": "Choose the kind of proof, choose the file and press 'Send to cf0'. cf0 checks it by hand and emails you."
+- "Lettings terms": "This step shows cf0's fee. Read it. If you want to agree the fee with cf0 first, cf0 does that with you on a call. Accept the terms only after you agree." Do not tell the owner to press the accept button. The tenant pays nothing.
 
 Then call `ask_agent`. The home is `not_ready` with `ownership_verified` in `missing` until cf0 checks the proof by hand. This is correct. If the owner sent the proof, do not ask for it again. On cf0.ai the home shows "Waiting for cf0". Tell the owner:
 
-"Your listing draft is ready and waits for approval. cf0 checks your proof of ownership. Then you approve the listing. Nothing goes live before you approve it. When you want to check, come back here and say 'is my home ready?'."
+"Your listing draft is saved. cf0 checks your proof of ownership by hand. Then you accept the lettings terms, if you agree, and you approve the listing. Nothing goes live before that. When you want to check, come back here and say 'is my home ready?'."
 
-This is the end of the walkthrough.
+Do not give a time for cf0's check. This is the end of the walkthrough.
 
 ## Step 6: Approve and list
 

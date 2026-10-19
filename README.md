@@ -5,8 +5,8 @@ Zero is an AI property manager, an AI employee that works inside [cf0](https://c
 ## Install
 
 - **Claude Code:** Run `/plugin marketplace add cf0-enterprise/cf0-zero`. Then run `/plugin install cf0-zero@cf0`.
-- **Claude app:** Select Customize > Connectors > Add custom connector. Enter `https://api.cf0.ai/mcp`. Then upload the [list-my-home skill](https://cf0.ai/skills/list-my-home.zip).
-- **ChatGPT:** Add the cf0 app. In Business or Enterprise, add the skill.
+- **Claude app:** Select Customize > Connectors, then + > Add custom connector. Name it `cf0`, enter `https://api.cf0.ai/mcp`, press Continue, then Add. To add the skill, turn on Settings > Capabilities > Code execution. Then select Customize > Skills, then + > Upload a skill, and choose the [list-my-home skill](https://cf0.ai/skills/list-my-home.zip).
+- **ChatGPT:** Zero is not in the ChatGPT app directory yet. Turn on Developer mode in Settings > Apps & Connectors > Advanced settings. Press Create. Name it `cf0`, enter `https://api.cf0.ai/mcp` and choose OAuth. In a new chat, press + and turn on cf0 under Developer mode. ChatGPT skills work only in Business and Enterprise workspaces. To list a home in any other workspace, paste the prompt from [cf0.ai/list/assistant](https://cf0.ai/list/assistant).
 
 ## How it works
 
@@ -30,7 +30,7 @@ People on your firm's records appear as reference codes such as `p_k7mq2xrb4a` w
 | `plugin.json`, `mcp.json` | Agent Plugins manifest and MCP server for ChatGPT and Codex |
 | `.claude-plugin/plugin.json`, `.mcp.json` | Plugin manifest and MCP server for Claude |
 | `skills/zero-property-manager/SKILL.md` | How your assistant works with Zero, using the four tools |
-| `skills/list-my-home/SKILL.md` | Walks the owner through four steps: create a cf0 account, add home facts, upload photos, and make an optional Polycam 3D scan. The listing draft then waits for the owner's approval. |
+| `skills/list-my-home/SKILL.md` | Walks the owner through a cf0 account, the home facts with the rent and the deposit, the photos and an optional Polycam 3D scan. Then it tells the owner the steps on cf0.ai before the home goes live: the ownership proof that cf0 checks by hand, the lettings terms and the owner's approval. |
 | `assets/` | Zero logos and composer icons, light and dark |
 | `listing/` | Directory submission material; not loaded by the plugin |
 | `scripts/` | Repository checks; not loaded by the plugin |
