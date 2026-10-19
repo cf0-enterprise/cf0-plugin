@@ -2,6 +2,12 @@
 
 Zero is an AI property manager, an AI employee that works inside [cf0](https://cf0.ai) for property management, lettings and short-term rental firms. This plugin lets your team hand Zero its follow-ups from Claude, ChatGPT or Codex.
 
+## Install
+
+- **Claude Code:** Run `/plugin marketplace add cf0-enterprise/cf0-zero`. Then run `/plugin install cf0-zero@cf0`.
+- **Claude app:** Select Customize > Connectors > Add custom connector. Enter `https://api.cf0.ai/mcp`. Then upload the [list-my-home skill](https://cf0.ai/skills/list-my-home.zip).
+- **ChatGPT:** Add the cf0 app. In Business or Enterprise, add the skill.
+
 ## How it works
 
 You hand Zero the follow-ups your team would otherwise chase by email, such as arranging access with a tenant for a repair, confirming a check-out time with a guest, or telling an owner about booked work. Each task is about one person on your firm's records. To add someone new, Zero first shows you their name, email, role and property, and adds them only after you agree. Zero plans the task and drafts an email from your firm's own Zero mailbox. Someone at your firm previews and approves the email, in chat or on cf0.ai, and nothing is sent before that. Zero then sends it, reads the reply and closes the task once the person confirms. If they suggest a different time or ask something only your team can answer, Zero asks you first and drafts its reply for your approval.
@@ -24,7 +30,7 @@ People on your firm's records appear as reference codes such as `p_k7mq2xrb4a` w
 | `plugin.json`, `mcp.json` | Agent Plugins manifest and MCP server for ChatGPT and Codex |
 | `.claude-plugin/plugin.json`, `.mcp.json` | Plugin manifest and MCP server for Claude |
 | `skills/zero-property-manager/SKILL.md` | How your assistant works with Zero, using the four tools |
-| `skills/list-my-home/SKILL.md` | How your assistant takes an owner from "list my home" to a live listing on cf0 |
+| `skills/list-my-home/SKILL.md` | Walks the owner through four steps: create a cf0 account, add home facts, upload photos, and make an optional Polycam 3D scan. The listing draft then waits for the owner's approval. |
 | `assets/` | Zero logos and composer icons, light and dark |
 | `listing/` | Directory submission material; not loaded by the plugin |
 | `scripts/` | Repository checks; not loaded by the plugin |
