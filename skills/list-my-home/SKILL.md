@@ -46,7 +46,15 @@ Then say: "At the end, your listing draft waits for your approval. Nothing goes 
 
 Call `ask_agent` with no arguments.
 
-- If the assistant asks the owner to sign in to cf0, tell the owner: "Type your email and press Continue. If you are new, tick 'I agree to the Terms of Service and Privacy Policy' and press Continue. Choose 'I own homes', then 'Let'. In 'About you', fill in your name, phone number, country and how many homes you let. Press Finish, then 'Continue to your assistant'." Then call `ask_agent` again.
+- If the assistant asks the owner to sign in to cf0, tell the owner these steps, all in one message:
+  1. "Type your email and press Continue."
+  2. "cf0 sends a code to your email. Type the code."
+  3. "If you are new, tick 'I agree to the Terms of Service and Privacy Policy' and press Continue."
+  4. "Choose 'I own homes' and press Continue. Choose 'Let' and press Continue."
+  5. "In 'About you', fill in your name, phone number, country and how many homes you let. Press Finish."
+  6. "Press 'Continue to your assistant'. If the page asks if your assistant can use your cf0 account, press Allow. Then come back here."
+
+  Then call `ask_agent` again.
 - If the result has `status` `no_firm`, or `list_home` later returns `no_firm`: the sign-in has no cf0 account for homes yet. Give the `open_in_cf0` link. Tell the owner: "Type the town, press 'Start listing' and sign up with 'I own homes'. When the page asks about the home, come back here. I add the home with you." Then call `ask_agent` again.
 - If the answer has `homes`, show them in one short list (label, status, next step). Ask if the owner wants to continue one of them or add a new home. To continue a home, go to the first step that is not done.
 - A `needs_setup` answer about Zero setup (billing, mailbox, people) does not stop a listing. Continue.
