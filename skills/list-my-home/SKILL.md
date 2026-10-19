@@ -46,7 +46,7 @@ Then say: "At the end, your listing draft waits for your approval. Nothing goes 
 
 Call `ask_agent` with no arguments.
 
-- If the assistant asks the owner to sign in to cf0, tell the owner: "Press Sign up if you are new. Choose 'I own homes', then 'Let'. Type your name and phone, then press Finish and 'Continue to your assistant'." Then call `ask_agent` again.
+- If the assistant asks the owner to sign in to cf0, tell the owner: "Type your email and press Continue. If you are new, tick 'I agree to the Terms of Service and Privacy Policy' and press Continue. Choose 'I own homes', then 'Let'. In 'About you', fill in your name, phone number, country and how many homes you let. Press Finish, then 'Continue to your assistant'." Then call `ask_agent` again.
 - If the result has `status` `no_firm`, or `list_home` later returns `no_firm`: the sign-in has no cf0 account for homes yet. Give the `open_in_cf0` link. Tell the owner: "Type the town, press 'Start listing' and sign up with 'I own homes'. When the page asks about the home, come back here. I add the home with you." Then call `ask_agent` again.
 - If the answer has `homes`, show them in one short list (label, status, next step). Ask if the owner wants to continue one of them or add a new home. To continue a home, go to the first step that is not done.
 - A `needs_setup` answer about Zero setup (billing, mailbox, people) does not stop a listing. Continue.
@@ -88,7 +88,7 @@ Keep the `draft_id` and the `open_in_cf0` links from the result. To add or chang
 
 The result `status`:
 
-- `staged`: the draft is saved. Ask the owner for each item in `missing_details`, then call `list_home` again with the `draft_id`. When `missing_details` is empty, go to step 3.
+- `staged`: the draft is saved. Ask the owner for each item in `missing_details`, then call `list_home` again with the `draft_id`. An item with a dot names the `list_home` field with an underscore, for example `layout.name` is `layout_name`. When `missing_details` is empty, go to step 3.
 - `refused` with a deposit refusal: show the `value`, the `cap`, the `currency` and the `rule` as the result gives them. Ask the owner for a new deposit. Do not offer one.
 - `unread_money` in the result: cf0 could not read that amount. Ask the owner to type it again, for example with the currency.
 - `no_firm`: see step 1.
@@ -102,7 +102,7 @@ Give the `photo_rights` link from the last `list_home` result. Tell the owner:
 1. "Open the link on the device that has the photos. Sign in with the same cf0 account."
 2. "If the page shows the details of the home, check them and press 'Add the home'."
 3. "In 'Photos', press 'Choose photos' and pick 5 to 20 photos: each room, the kitchen, the bathroom and the outside."
-4. "Tick the box that says you took the photos or may use them. Press 'Upload'."
+4. "Tick the box that says you took the photos or may use them. Press the 'Upload' button. The page then says how many photos it added."
 5. "Come back here and say 'done'."
 
 When the owner says "done", call `ask_agent`. If the home still has `photo_rights` in `missing`, ask the owner to check that the upload finished. Then go to step 4.
@@ -131,7 +131,7 @@ Two short items on the same page let cf0 check the home:
 - "Ownership proof": choose the kind of proof, choose the file and press "Send to cf0". cf0 checks it by hand.
 - "Lettings terms": press "Accept, fee agreed on a call". The fee is agreed with the owner on a call. The tenant pays nothing.
 
-Then call `ask_agent`. Show the home's status and `next_step` in one line. Tell the owner:
+Then call `ask_agent`. The home is `not_ready` with `ownership_verified` in `missing` until cf0 checks the proof by hand. This is correct. If the owner sent the proof, do not ask for it again. On cf0.ai the home shows "Waiting for cf0". Tell the owner:
 
 "Your listing draft is ready and waits for approval. cf0 checks your proof of ownership. Then you approve the listing. Nothing goes live before you approve it. When you want to check, come back here and say 'is my home ready?'."
 
