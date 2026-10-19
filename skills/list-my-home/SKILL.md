@@ -1,6 +1,6 @@
 ---
 name: list-my-home
-description: Walks a home owner through listing a home to let on cf0 after the plugin is installed - a cf0 account, the home facts with the rent and the deposit, the photos and the 3D scan - and then tells the owner the steps on cf0.ai before the home goes live - the ownership proof that cf0 checks by hand, the lettings terms and the owner's approval. Uses the cf0 connector tools. Use when someone wants to let, rent out or list their flat, apartment or house on cf0, says "list my home", or asks what cf0 needs before a home can go live.
+description: Walks a home owner through listing a home to let on cf0. The steps are a cf0 account, the home facts with the rent and the deposit, the photos and the 3D scan. Then it names the steps on cf0.ai before the home goes live - the ownership proof, the lettings terms and the approval. Uses the cf0 connector tools. Use when someone wants to let, rent out or list their flat, apartment or house on cf0, says "list my home", or asks what cf0 needs before a home can go live.
 license: MIT
 metadata:
   author: cf0
