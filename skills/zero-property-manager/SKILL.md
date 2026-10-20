@@ -5,7 +5,7 @@ description: Work with Zero, your firm's AI property manager in cf0. Use it when
 
 # Zero, your AI property manager
 
-Zero is the AI property manager of the user's firm in cf0, an AI employee that does the firm's follow-ups. Its work lives on the firm's task board in cf0, with the same approvals and the same record of what it sent. These four tools are the only way to reach it from here.
+Zero is the AI employee of cf0. It lets and manages homes, and it does the follow-ups of the user's firm. Its work lives on the firm's task board in cf0, with the same approvals and the same record of what it sent. These four tools are the only way to reach it from here.
 
 | Tool | What it does | Changes anything? |
 |---|---|---|

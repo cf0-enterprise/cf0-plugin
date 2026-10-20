@@ -18,7 +18,7 @@ On 2026-10-02 Luca emailed `mcp-review@anthropic.com` from luca@cf0.ai to ask wh
 | Field | Value |
 |---|---|
 | Server name (max 100) | Zero |
-| One-liner (max 200) | Zero is your firm's AI property manager in cf0. Hand it follow-ups with tenants, guests and owners by email, approve each email before it goes out, and pay per completed task. |
+| One-liner (max 200) | Zero, the AI employee of cf0, lets and manages your firm's homes. Hand it follow-ups with tenants, guests and owners by email, approve each email before it goes out, and pay per completed task. |
 | Categories | Productivity; Business (check the portal's list) |
 | Documentation URL | https://cf0.ai/support#assistants |
 | Privacy policy URL | https://cf0.ai/privacy |
@@ -30,7 +30,7 @@ On 2026-10-02 Luca emailed `mcp-review@anthropic.com` from luca@cf0.ai to ask wh
 
 **Description (max 2,000):**
 
-> Zero is an AI property manager, an AI employee that works inside cf0 for property management, lettings and short-term rental firms. This connector lets your team hand Zero its follow-ups from Claude, and Zero keeps the work on your firm's task board in cf0.
+> Zero is the AI employee of cf0. It lets and manages homes for owners and for property management, lettings and short-term rental firms. This connector lets your team hand Zero its follow-ups from Claude, and Zero keeps the work on your firm's task board in cf0.
 >
 > Ask Zero what it is handling, what is waiting on you and where a task stands. Asking changes nothing and contacts no one.
 >

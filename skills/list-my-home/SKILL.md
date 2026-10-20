@@ -4,7 +4,7 @@ description: Walks a home owner through listing a home to let on cf0. The steps 
 license: MIT
 metadata:
   author: cf0
-  version: "1.4.0"
+  version: "1.4.1"
 ---
 
 # List my home on cf0
@@ -38,7 +38,7 @@ Then say: "Nothing goes live before cf0 checks your proof and you approve the li
 
 - Ask one question at a time. Use short, plain words.
 - Rent and deposit come only from the owner. Put them in `rent_owner_text` and `deposit_owner_text` exactly as the owner typed them. Do not suggest, round, convert or calculate an amount. If the owner asks you to choose an amount, say that the owner chooses it.
-- Do not state cf0's fee or any figure for it. The fee shows in "Lettings terms" on cf0.ai. If the owner wants to talk about the fee, cf0 agrees it with the owner on a call (support@cf0.ai). The tenant pays nothing.
+- Do not state cf0's fee or any figure for it. The fee shows on cf0.ai and in "Lettings terms" on cf0.ai. The owner pays it once a lease is signed. The tenant pays nothing.
 - Do not tell the owner to accept the lettings terms or to press an accept button. The owner reads the terms and decides.
 - Do not ask about a renter's children, age, benefits, nationality or immigration status. A rule about tenants is not a home fact. It goes in the home's criteria on cf0.ai.
 - Photos, scans and ownership proof go to cf0.ai, not into this chat. Do not ask the owner to paste or attach them here.
@@ -144,7 +144,7 @@ Tell the owner that cf0 builds the 3D tour and shows it after review. Do not pro
 Two more items on the same page come before the home can go live. Tell the owner:
 
 - "Ownership proof": "Choose the kind of proof, choose the file and press 'Send to cf0'. cf0 checks it by hand and emails you."
-- "Lettings terms": "This step shows cf0's fee. Read it. If you want to agree the fee with cf0 first, cf0 does that with you on a call. Accept the terms only after you agree." Do not tell the owner to press the accept button. The tenant pays nothing.
+- "Lettings terms": "This step shows cf0's fee. Read it, then decide." Do not tell the owner to press the accept button. The tenant pays nothing.
 
 Then call `ask_agent`. The home is `not_ready` with `ownership_verified` in `missing` until cf0 checks the proof by hand. This is correct. If the owner sent the proof, do not ask for it again. On cf0.ai the home shows "Waiting for cf0". Tell the owner:
 
@@ -171,7 +171,7 @@ If the home is not live yet, give the next step from `ask_agent`. Do not guess a
 
 ## Step 8: After move-in, cf0 can manage the home
 
-Tell the owner, in one or two lines: cf0 also manages homes. After a tenant moves in, Zero, cf0's AI property manager, can do the follow-ups by email, for example access for a repair, owner updates and move-out. The owner approves each email before it goes out.
+Tell the owner, in one or two lines: cf0 also manages homes. After a tenant moves in, Zero, cf0's AI employee, can do the follow-ups by email, for example access for a repair, owner updates and move-out. The owner approves each email before it goes out.
 
 If the owner wants this:
 
