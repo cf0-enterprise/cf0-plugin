@@ -1,7 +1,7 @@
 {
   "name": "cf0-zero",
   "displayName": "Zero",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "Zero, the AI employee of cf0, lets and manages your firm's homes. Hand it follow-ups with tenants, guests and owners by email, approve each email before it goes out, and pay per completed task.",
   "author": {
     "name": "cf0",

@@ -4,7 +4,7 @@ description: Walks a home owner through listing a home to let on cf0. The steps 
 license: MIT
 metadata:
   author: cf0
-  version: "1.4.1"
+  version: "1.4.2"
 ---
 
 # List my home on cf0
@@ -90,6 +90,7 @@ Ask for these, one at a time. Skip what the owner already said.
 6. The shortest let, in months.
 7. One to five facts in the owner's words, for example "lift", "sea view", "pets on request".
 8. "What rent do you want, and what deposit?" Copy the answer into `rent_owner_text` and `deposit_owner_text` with no change. You need both before step 3. If the owner has no deposit, ask the owner to say 0.
+9. "Do you want the listing to show the deposit? The default is yes. If you say no, renters do not see it on the page, and Zero tells a renter the deposit when the renter asks." If the owner says no, set `deposit_shown` to false. If the owner says yes or does not answer, do not send `deposit_shown`. cf0 always needs the deposit amount, also when the listing does not show it.
 
 The photo page makes the home from the draft only when the draft has the rent and the deposit. Photos attach to the home, not to the draft. Thus, if the owner does not know the rent or the deposit yet, do not give the photo link. Save the draft and tell the owner to come back with both amounts.
 
@@ -97,7 +98,7 @@ Use the time zone of the town, for example `Europe/London`, `Europe/Madrid` or `
 
 ### Save the draft
 
-Call `list_home` with a new `request_id` (for example a short random string) and every field you have: `market`, `city`, `building_name`, `address_line`, `private_label`, `bedrooms`, `bathrooms`, `furnished`, `available_from`, `min_term_months`, `timezone`, `facts`, `rent_owner_text`, `deposit_owner_text`.
+Call `list_home` with a new `request_id` (for example a short random string) and every field you have: `market`, `city`, `building_name`, `address_line`, `private_label`, `bedrooms`, `bathrooms`, `furnished`, `available_from`, `min_term_months`, `timezone`, `facts`, `rent_owner_text`, `deposit_owner_text`, and `deposit_shown` when the owner said no in question 9.
 
 Keep the `draft_id` and the `open_in_cf0` links from the result. To add or change a detail later, call `list_home` with that `draft_id` and only the new fields. On a retry of the same call, use the same `request_id`.
 
