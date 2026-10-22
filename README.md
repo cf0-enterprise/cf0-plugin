@@ -18,6 +18,7 @@ Every task stays on your firm's board in cf0, with a record of what Zero sent an
 
 - **Ask Zero** (`ask_agent`, read-only): what Zero is handling, what is waiting on you, and where a task stands. It also reads your homes and their listing requirements. It changes nothing and contacts no one.
 - **Prepare a lettings draft** (`list_home`): write a draft home from the details the user gives. It never publishes the home.
+- **Import listings** (`import_listings`): stage the homes from the owner's own ad text and photo links for review on cf0. It does not open portal pages, and it never publishes a home.
 - **Give Zero a task** (`give_agent_task`): hand Zero one task about one person on your firm's records, or about someone new that you agree to add, such as arranging access with a tenant for a repair visit, confirming a check-out time with a guest or telling an owner about booked work. Zero drafts one email from your firm's own Zero mailbox and sends it only after someone at your firm approves it.
 - **Answer Zero** (`answer_agent`): approve or decline an ordinary email after a preview, answer a question Zero asked about your task, cancel a task, or approve or decline a home as the named admin approver after the listing checks pass.
 
@@ -29,8 +30,8 @@ People on your firm's records appear as reference codes such as `p_k7mq2xrb4a` w
 |---|---|
 | `plugin.json`, `mcp.json` | Agent Plugins manifest and MCP server for ChatGPT and Codex |
 | `.claude-plugin/plugin.json`, `.mcp.json` | Plugin manifest and MCP server for Claude |
-| `skills/zero-property-manager/SKILL.md` | How your assistant works with Zero, using the four tools |
-| `skills/list-my-home/SKILL.md` | Walks the owner through a cf0 account, the home facts with the rent and the deposit, the photos and an optional Polycam 3D scan. Then it names the steps on cf0.ai before the home goes live: the ownership proof, the lettings terms and the approval. |
+| `skills/zero-property-manager/SKILL.md` | How your assistant works with Zero, using the five tools |
+| `skills/list-my-home/SKILL.md` | Walks the owner through a cf0 account, the home facts with the rent and the deposit, the photos and an optional Polycam 3D scan. Then it names the steps on cf0.ai before the home goes live: the ownership proof, the lettings terms and the approval. It also imports the homes that the owner already advertises, from the owner's own ad text and photos. |
 | `assets/` | Zero logos and composer icons, light and dark |
 | `listing/` | Directory submission material; not loaded by the plugin |
 | `scripts/` | Repository checks; not loaded by the plugin |

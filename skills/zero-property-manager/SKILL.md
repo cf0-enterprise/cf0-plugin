@@ -5,7 +5,7 @@ description: Work with Zero, your firm's AI property manager in cf0. Use it when
 
 # Zero, your AI property manager
 
-Zero is the AI employee of cf0. It lets and manages homes, and it does the follow-ups of the user's firm. Its work lives on the firm's task board in cf0, with the same approvals and the same record of what it sent. These four tools are the only way to reach it from here.
+Zero is the AI employee of cf0. It lets and manages homes, and it does the follow-ups of the user's firm. Its work lives on the firm's task board in cf0, with the same approvals and the same record of what it sent. These five tools are the only way to reach it from here.
 
 | Tool | What it does | Changes anything? |
 |---|---|---|
@@ -13,6 +13,7 @@ Zero is the AI employee of cf0. It lets and manages homes, and it does the follo
 | `give_agent_task` | Hands Zero one task about one person: someone on the firm's records, or someone new that the user agrees to add | Yes. Zero puts it on the board and drafts one email |
 | `answer_agent` | Approves or declines a proposed action or home, answers Zero's question, or cancels a task | Yes |
 | `list_home` | Writes a draft home for lettings on cf0 from what the user says | Yes. It writes a draft only. It never publishes |
+| `import_listings` | Stages the homes from the owner's own ad text for review on cf0 | Yes. It stages homes for review only. It never publishes |
 
 ## What the plugin covers
 
@@ -86,6 +87,7 @@ The result's `status`:
 
 - Use `ask_agent` to read the user's homes on cf0, the status and the next step of each home, and what a home still needs before it can list. Pass `market` (for example `GB-ENG` for England) when the user asks what they need to list a home in a place. If the answer says "cf0 does not list there yet", tell the user that.
 - Use `list_home` when the user wants to let a home or add details to a draft. Pass `draft_id` from the last result to add to the same draft.
+- Use `import_listings` when the user wants to bring in homes that they already advertise. Pass the ad text that the user pastes, the `market`, and links to the user's own photo files of one home. Do not open or read a portal page. Give the `open_in_cf0` link, where the user checks each home.
 - Put the rent and the deposit in `rent_owner_text` and `deposit_owner_text` exactly as the user typed them. Never suggest, round, convert or compute a rent or a deposit. If the user did not give one, leave it out and ask the user.
 - If `list_home` refuses a deposit above the market cap, show the value, the cap and the rule as written. Do not offer a lower amount.
 - Some acts happen only on cf0.ai: the ownership proof, the photo rights, the lettings terms and the named approver. Show the `open_in_cf0` links for them. Do not say that a home is listed until `ask_agent` shows it as listed.
