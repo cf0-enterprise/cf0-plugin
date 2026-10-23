@@ -9,7 +9,7 @@
       "name": "cf0-zero",
       "source": "./",
       "description": "Hand Zero, the cf0 property agent, follow-ups with tenants, guests and owners. Zero drafts each email for your approval, sends it and tracks the reply in cf0. Owners can also prepare home drafts.",
-      "version": "1.4.4"
+      "version": "1.4.5"
     }
   ]
 }

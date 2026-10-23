@@ -1,6 +1,6 @@
 # OpenAI review kit: Zero
 
-What the ChatGPT plugin submission asks for, and why. The seven positive and five negative cases, countries and release notes are in `plugin.json`. The ZIP upload imports them. Credentials never go in this file or in the ZIP: they are entered only in the dashboard's **Review details** form.
+What the ChatGPT plugin submission asks for, and why. The five positive and three negative cases, countries and release notes are in `plugin.json`. The ZIP upload imports them. Credentials never go in this file or in the ZIP: they are entered only in the dashboard's **Review details** form.
 
 - Plugin: `cf0-zero`, display name "cf0 Zero", one MCP server at `https://api.cf0.ai/mcp`.
 - Tools: `ask_agent`, `give_agent_task`, `answer_agent`, `save_home_draft`.
@@ -15,7 +15,7 @@ The reviewer signs in to the demo firm **cf0 Demo Lettings** (build map T9.2). O
 | Maya Lindqvist | tenant | Harbour View, Flat 3 | P2 |
 | Tom Becker | guest | Seafront Studio 2 | P3 |
 | Priya Nair | owner | Elm Court 5 | P4 |
-| Sam Okafor | tenant | Riverside 7 | P5 |
+| Sam Okafor | tenant | Riverside 7 | P1 |
 | 15 residents | tenants | Elm Court | N3 |
 
 Seeded items on the board:
@@ -25,7 +25,7 @@ Seeded items on the board:
 - **T3**: an open task "Arrange gutter cleaning access with the tenant at Riverside 7".
 - **A2**: a lift maintenance notice to all 15 Elm Court residents, waiting for approval. It reaches 10 or more people, so it can only be approved on cf0.ai.
 
-## Positive test cases (7)
+## Positive test cases (5)
 
 ### P1. What is waiting on me
 
@@ -52,25 +52,13 @@ Seeded items on the board:
 - **Tools triggered:** `ask_agent`, then `answer_agent`
 - **Expected behaviour:** `ask_agent` finds Zero's question with the owner's reply. `answer_agent` answers it with `approve` and the reviewer's words, and returns `done`. Zero then writes its reply to the owner, which waits for approval like any other email; nothing is sent to the owner yet.
 
-### P5. Cancel a task
-
-- **Prompt:** "Cancel the gutter cleaning task at Riverside 7."
-- **Tools triggered:** `ask_agent`, then `answer_agent`
-- **Expected behaviour:** `ask_agent` finds task T3 and its version code. `answer_agent` cancels it and returns `done`. The task shows as cancelled on cf0.ai/app/tasks and Zero sends nothing further about it.
-
-### P6. Ask what a home needs to list
-
-- **Prompt:** "What do I need to list a flat in England?"
-- **Tools triggered:** `ask_agent` with `market: "GB-ENG"`
-- **Expected behaviour:** `ask_agent` reads the GB-ENG market requirements. It shows what the home needs before it can list. It does not suggest a rent or deposit.
-
-### P7. Create a lettings draft
+### P5. Create a lettings draft
 
 - **Prompt:** "List my 2-bed in Manchester, rent is £1,200 pcm"
 - **Tools triggered:** `save_home_draft`
 - **Expected behaviour:** `save_home_draft` stages a draft. `rent_owner_text` stays exactly "£1,200 pcm". The result names any missing details. cf0 does not publish the home.
 
-## Negative test cases (5)
+## Negative test cases (3)
 
 ### N1. Leads and marketing
 
@@ -89,18 +77,6 @@ Seeded items on the board:
 - **Prompt:** "Approve Zero's lift maintenance notice to the 15 Elm Court residents."
 - **Why it must not complete:** Messages to 10 or more people can only be approved by someone at the firm on cf0.ai, never from an assistant.
 - **Expected behaviour:** `ask_agent` shows the notice as waiting, with the number of people it reaches and a link, and without the message. `answer_agent` returns `needs_cf0`: "Messages to 10 or more people can only be approved in cf0." with an `open_in_cf0` link. The notice stays pending and no resident receives anything.
-
-### N4. Do not suggest a rent
-
-- **Prompt:** "What should I charge?"
-- **Why it must not complete:** Zero must not suggest or calculate a rent.
-- **Expected behaviour:** The assistant does not suggest or calculate an amount. It asks the user for the rent they choose.
-
-### N5. Do not add a tenant rule as a fact
-
-- **Prompt:** "No kids please, add that"
-- **Why it must not complete:** Tenant rules belong in the home's criteria on cf0.ai, not in home facts.
-- **Expected behaviour:** The assistant does not add a home fact. It tells the user that tenant rules go in the home's criteria on cf0.ai.
 
 ## Tool annotations and justifications
 

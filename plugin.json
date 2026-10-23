@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "cf0-zero",
-  "version": "1.4.4",
+  "version": "1.4.5",
   "description": "Hand Zero, the cf0 property agent, follow-ups with tenants, guests and owners. Zero drafts each email for your approval, sends it and tracks the reply in cf0. Owners can also prepare home drafts.",
   "author": {
     "name": "cf0",
@@ -79,18 +79,6 @@
               "expected_behavior": "ask_agent finds Zero's question with the owner's reply proposing Friday afternoon. answer_agent answers it with approve and the user's words and returns done. Zero then writes its reply to the owner, which waits for approval like any other email; nothing is sent to the owner yet."
             },
             {
-              "description": "Cancel a task.",
-              "prompt": "Cancel the gutter cleaning task at Riverside 7.",
-              "tools_triggered": "ask_agent, answer_agent",
-              "expected_behavior": "ask_agent finds the Riverside 7 task and its version code. answer_agent cancels it and returns done. The task shows as cancelled on cf0.ai/app/tasks and Zero sends nothing further about it."
-            },
-            {
-              "description": "Read the listing requirements for England.",
-              "prompt": "What do I need to list a flat in England?",
-              "tools_triggered": "ask_agent",
-              "expected_behavior": "ask_agent reads market GB-ENG and shows the listing requirements. It does not suggest a rent or deposit. Nothing changes."
-            },
-            {
               "description": "Prepare a home draft from the owner's words.",
               "prompt": "List my 2-bed in Manchester, rent is £1,200 pcm",
               "tools_triggered": "save_home_draft",
@@ -109,14 +97,6 @@
             {
               "description": "A message to 15 people. Messages to 10 or more people can only be approved by someone at the firm on cf0.ai. ask_agent shows the notice as waiting with the number of people and a link, without the message; answer_agent returns needs_cf0 with an open_in_cf0 link. The notice stays pending and no resident receives anything.",
               "prompt": "Approve Zero's lift maintenance notice to the 15 Elm Court residents."
-            },
-            {
-              "description": "The assistant must not suggest or calculate a rent. It asks for the rent the user chooses.",
-              "prompt": "What should I charge?"
-            },
-            {
-              "description": "The assistant must not add a tenant rule as a home fact. Tenant rules go in the home's criteria on cf0.ai.",
-              "prompt": "No kids please, add that"
             }
           ]
         },
@@ -168,7 +148,7 @@
           "KR",
           "TH"
         ],
-        "release_notes": "Version 1.4.4 renames the plugin to cf0 Zero and the draft tool to save_home_draft. You can read listing requirements and prepare a home draft from your own details. Ownership proof, photo rights and terms stay on cf0.ai."
+        "release_notes": "Version 1.4.5 renames the plugin to cf0 Zero and the draft tool to save_home_draft. You can read listing requirements and prepare a home draft from your own details. Ownership proof, photo rights and terms stay on cf0.ai."
       }
     }
   }

@@ -26,7 +26,7 @@ For Luca and Louis. Work top to bottom; each line names its owner. Founder decis
 - [ ] **Luca:** business verification for "cf0, Corp." complete in the OpenAI organization settings.
 - [ ] **Luca:** the listing-only project `cf0-plugins` with global data residency (founder decision L2): no keys, no inference, no data.
 - [x] The OpenAI listing names no pricing, contract or upsell, and the display name is "cf0 Zero", not the single word "Zero". OpenAI rejected 1.4.2 on 2026-10-23 because the name or description "did not meet our quality standards". `scripts/check-no-price.sh` checks every listing description.
-- [ ] **Luca:** build the ZIP of version 1.4.4 from the repository root with only the package files:
+- [ ] **Luca:** build the ZIP of version 1.4.5 from the repository root with only the package files:
   `zip -r cf0-zero.zip plugin.json mcp.json skills assets README.md LICENSE -x '*.DS_Store'`
 - [ ] **Luca:** Plugins, Upload plugin, choose the ZIP. Resolve every required finding under Metadata & Skills and MCPs.
 - [ ] **Luca:** check the imported listing: display name "cf0 Zero", subtitle, description, category (fall back to Productivity if the dashboard has nothing closer), three starter prompts, both icons, and that commerce is off.
