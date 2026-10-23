@@ -95,12 +95,6 @@
               "prompt": "List my 2-bed in Manchester, rent is £1,200 pcm",
               "tools_triggered": "list_home",
               "expected_behavior": "list_home stages a draft. rent_owner_text stays exactly £1,200 pcm. The result names missing details. The home is not published."
-            },
-            {
-              "description": "Show a ready home, then approve it with its current id and version.",
-              "prompt": "Show my ready home.",
-              "tools_triggered": "ask_agent, answer_agent",
-              "expected_behavior": "Use a ready home in the matching backend release. ask_agent shows its summary and current version. After the named admin approver says Approve it, answer_agent returns done and the home shows as listed. A repeat returns already_answered and records no second decision."
             }
           ],
           "negative": [
@@ -174,7 +168,7 @@
           "KR",
           "TH"
         ],
-        "release_notes": "Version 1.1.0 adds home drafts and listing decisions. Read listing requirements, prepare a draft from your own details, and approve or decline a ready home. Ownership proof, photo rights and terms stay on cf0.ai."
+        "release_notes": "Version 1.4.3 renames the plugin to cf0 Zero and describes what it does. You can read listing requirements and prepare a home draft from your own details. Ownership proof, photo rights and terms stay on cf0.ai."
       }
     }
   }
