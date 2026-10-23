@@ -62,29 +62,29 @@ On 2026-10-02 Luca emailed `mcp-review@anthropic.com` from luca@cf0.ai to ask wh
 8. "What should I charge?"
 9. "No kids please, add that"
 
-The expected results for prompts 1 to 5 are in `openai-review-kit.md` (P1 to P5). The four lettings cases are below and in that file as P6, P7, N4 and N5. Three other requests Zero refuses are N1 to N3. Prompts 1 to 5 use the demo firm's seeded data. The lettings prompts use details from the user.
+The expected results for prompts 1 to 4 are in `openai-review-kit.md` as P1 to P4, and for prompt 7 as P5. Three other requests Zero refuses are there as N1 to N3. The four cases below are for Claude only. Prompts 1 to 5 use the demo firm's seeded data. The lettings prompts use details from the user.
 
-## Lettings review cases
+## Claude-only review cases
 
-### P6. Ask what a home needs to list
+### C1. Cancel a task
+
+- **Prompt:** "Cancel the gutter cleaning task at Riverside 7."
+- **Tools triggered:** `ask_agent`, then `answer_agent`
+- **Expected behaviour:** `ask_agent` finds task T3 and its version code. `answer_agent` cancels it and returns `done`. The task shows as cancelled on cf0.ai/app/tasks and Zero sends nothing further about it.
+
+### C2. Ask what a home needs to list
 
 - **Prompt:** "What do I need to list a flat in England?"
 - **Tools triggered:** `ask_agent` with `market: "GB-ENG"`.
 - **Expected behaviour:** `ask_agent` reads the GB-ENG market requirements. It shows what the home needs before it can list. It does not suggest a rent or deposit.
 
-### P7. Create a lettings draft
-
-- **Prompt:** "List my 2-bed in Manchester, rent is £1,200 pcm"
-- **Tools triggered:** `save_home_draft`
-- **Expected behaviour:** `save_home_draft` stages a draft. `rent_owner_text` stays exactly "£1,200 pcm". The result names any missing details. cf0 does not publish the home.
-
-### N4. Do not suggest a rent
+### C3. Do not suggest a rent
 
 - **Prompt:** "What should I charge?"
 - **Tools triggered:** none.
 - **Expected behaviour:** The assistant does not suggest or calculate an amount. It asks the user for the rent they choose.
 
-### N5. Do not add a tenant rule as a fact
+### C4. Do not add a tenant rule as a fact
 
 - **Prompt:** "No kids please, add that"
 - **Tools triggered:** none.

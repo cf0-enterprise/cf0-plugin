@@ -91,13 +91,13 @@ Seeded items on the board:
 
 About four minutes, recorded in ChatGPT on the web with the reviewer account. The MCP server is added under Plugins, then Add, then Add custom MCP server. Show no billing page and no checkout.
 
-1. **0:00 to 0:20. Context.** cf0.ai/app/tasks for cf0 Demo Lettings, showing T1 to T3 and the waiting items. Voice-over: "Zero is the firm's AI property manager in cf0. This plugin lets staff work with it from ChatGPT."
+1. **0:00 to 0:20. Context.** cf0.ai/app/tasks for cf0 Demo Lettings, showing T1 to T3 and the waiting items. Voice-over: "cf0 is an AI real estate agency, and Zero is its AI agent. This plugin lets you list homes and work with Zero from ChatGPT."
 2. **0:20 to 0:50. Connect.** Add Zero, sign in with the reviewer's password (no code), pick cf0 Demo Lettings on the consent screen, return to ChatGPT.
 3. **0:50 to 1:20. P1.** Ask what is waiting. Point at the reference codes and that no name or contact detail appears.
 4. **1:20 to 1:50. P2.** Hand Zero the Harbour View task. Show the plan, then the new task on cf0.ai/app/tasks. Repeat the prompt to show `already_given`.
 5. **1:50 to 2:30. P3.** Preview the guest email, approve it, then show the task on cf0.ai/app/tasks. The email leaves on cf0's next send run, within 10 minutes.
 6. **2:30 to 2:55. P4.** Answer Zero's question; show the reply waiting for approval in cf0.
-7. **2:55 to 3:15. P5.** Cancel the Riverside 7 task; show it cancelled on the board.
+7. **2:55 to 3:15. P5.** Ask Zero to list a 2-bed in Manchester at £1,200 pcm. Show the draft on cf0.ai, not published, with the rent exactly as typed.
 8. **3:15 to 3:50. N1 to N3.** The Zillow leads refusal, the phone number refusal, and the 15-person notice sent to cf0.ai.
 9. **3:50 to 4:00. Close.** "Zero's work stays on the firm's board in cf0, and sensitive messages and documents need approval on cf0.ai."
 
