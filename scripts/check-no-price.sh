@@ -20,7 +20,9 @@ hits() {
     fi
     printf '%s\n' "$line"
   done
-  (cd "$1" && grep -Ein '"(longDescription|shortDescription)":' plugin.json | grep -Ei "$LISTING" || true)
+  (cd "$1" && jq -r '.description, .extensions["com.openai"].interface.shortDescription, .extensions["com.openai"].interface.longDescription' plugin.json
+    jq -r '.description' .claude-plugin/plugin.json
+    jq -r '.plugins[].description' .claude-plugin/marketplace.json) | grep -Ei "$LISTING" | sed 's/^/listing description: /' || true
 }
 
 found="$(hits "$ROOT")"

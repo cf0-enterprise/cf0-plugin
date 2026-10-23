@@ -2,7 +2,7 @@
 
 What the ChatGPT plugin submission asks for, and why. The eight positive and five negative cases, countries and release notes are in `plugin.json`. The ZIP upload imports them. Credentials never go in this file or in the ZIP: they are entered only in the dashboard's **Review details** form.
 
-- Plugin: `cf0-zero`, display name "Zero", one MCP server at `https://api.cf0.ai/mcp`.
+- Plugin: `cf0-zero`, display name "cf0 Zero", one MCP server at `https://api.cf0.ai/mcp`.
 - Tools: `ask_agent`, `give_agent_task`, `answer_agent`, `list_home`.
 - Support page: https://cf0.ai/support#assistants
 

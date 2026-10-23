@@ -1,6 +1,6 @@
-# Zero
+# cf0 Zero
 
-Zero is the AI employee of [cf0](https://cf0.ai). It lets and manages homes for owners and for property management, lettings and short-term rental firms. This plugin lets your team hand Zero its follow-ups from Claude, ChatGPT or Codex.
+cf0 Zero connects Claude, ChatGPT or Codex to your firm's workspace in [cf0](https://cf0.ai), a property management platform. Your team hands Zero, the cf0 property agent, its follow-ups with tenants, guests and owners from chat, and owners prepare home drafts.
 
 ## Install
 

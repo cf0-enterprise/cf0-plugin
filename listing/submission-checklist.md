@@ -25,11 +25,11 @@ For Luca and Louis. Work top to bottom; each line names its owner. Founder decis
 
 - [ ] **Luca:** business verification for "cf0, Corp." complete in the OpenAI organization settings.
 - [ ] **Luca:** the listing-only project `cf0-plugins` with global data residency (founder decision L2): no keys, no inference, no data.
-- [ ] **Luca:** decide whether the OpenAI description can say "pay per completed task" and name the cf0 contract. OpenAI's plugin guidelines say that descriptions must not "advertise pricing, subscriptions, free trials, discounts, or promotions", and that plugins must not "promote upgrades". If not, remove the sentence about pay and the sentence about the contract from `longDescription`, and the words "and pay per completed task" from the root `description`, before you build the ZIP.
-- [ ] **Luca:** build the ZIP of version 1.0.6 from the repository root with only the package files:
+- [x] The OpenAI listing names no pricing, contract or upsell, and the display name is "cf0 Zero", not the single word "Zero". OpenAI rejected 1.4.2 on 2026-10-23 because the name or description "did not meet our quality standards". `scripts/check-no-price.sh` checks every listing description.
+- [ ] **Luca:** build the ZIP of version 1.4.3 from the repository root with only the package files:
   `zip -r cf0-zero.zip plugin.json mcp.json skills assets README.md LICENSE -x '*.DS_Store'`
 - [ ] **Luca:** Plugins, Upload plugin, choose the ZIP. Resolve every required finding under Metadata & Skills and MCPs.
-- [ ] **Luca:** check the imported listing: display name "Zero", subtitle, description, category (fall back to Productivity if the dashboard has nothing closer), three starter prompts, both icons, and that commerce is off.
+- [ ] **Luca:** check the imported listing: display name "cf0 Zero", subtitle, description, category (fall back to Productivity if the dashboard has nothing closer), three starter prompts, both icons, and that commerce is off.
 - [ ] **Luca:** verify the domain with the challenge token (T9.4).
 - [ ] **Luca:** set up OAuth with CIMD against `https://clerk.cf0.ai`.
 - [ ] **Luca:** Review details: enter the 5 positive and 3 negative cases from `openai-review-kit.md`, the video URL, the annotation justifications, and the OpenAI reviewer's credentials and sign-in steps.
