@@ -8,8 +8,8 @@
     {
       "name": "cf0-zero",
       "source": "./",
-      "description": "Hand Zero, the cf0 property agent, follow-ups with tenants, guests and owners. Zero drafts each email for your approval, sends it and tracks the reply in cf0. Owners can also prepare home drafts.",
-      "version": "1.4.5"
+      "description": "cf0 is an AI real estate agency. List a home to let on cf0 from chat, and hand Zero, cf0's agent, the email follow-ups with tenants, guests and owners. You approve each email before it goes out.",
+      "version": "1.4.6"
     }
   ]
 }

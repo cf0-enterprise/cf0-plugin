@@ -4,7 +4,7 @@ description: Walks a home owner through listing a home to let on cf0. The steps 
 license: MIT
 metadata:
   author: cf0
-  version: "1.4.5"
+  version: "1.4.6"
 ---
 
 # List my home on cf0

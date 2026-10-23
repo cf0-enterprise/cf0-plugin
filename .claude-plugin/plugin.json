@@ -1,8 +1,8 @@
 {
   "name": "cf0-zero",
   "displayName": "cf0 Zero",
-  "version": "1.4.5",
-  "description": "Hand Zero, the cf0 property agent, follow-ups with tenants, guests and owners. Zero drafts each email for your approval, sends it and tracks the reply in cf0. Owners can also prepare home drafts.",
+  "version": "1.4.6",
+  "description": "cf0 is an AI real estate agency. List a home to let on cf0 from chat, and hand Zero, cf0's agent, the email follow-ups with tenants, guests and owners. You approve each email before it goes out.",
   "author": {
     "name": "cf0",
     "email": "support@cf0.ai",
@@ -11,7 +11,15 @@
   "homepage": "https://cf0.ai/support#assistants",
   "repository": "https://github.com/cf0-enterprise/cf0-zero",
   "license": "MIT",
-  "keywords": ["property management", "lettings", "short-term rentals", "maintenance", "tenants", "guests", "owners"],
+  "keywords": [
+    "property management",
+    "lettings",
+    "short-term rentals",
+    "maintenance",
+    "tenants",
+    "guests",
+    "owners"
+  ],
   "icon": "./assets/logo.png",
   "documentationUrl": "https://cf0.ai/support#assistants",
   "supportUrl": "https://cf0.ai/support#assistants",

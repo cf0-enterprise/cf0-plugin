@@ -1,6 +1,6 @@
 # cf0 Zero
 
-cf0 Zero connects Claude, ChatGPT or Codex to your firm's workspace in [cf0](https://cf0.ai), a property management platform. Your team hands Zero, the cf0 property agent, its follow-ups with tenants, guests and owners from chat, and owners prepare home drafts.
+cf0 Zero connects Claude, ChatGPT or Codex to your account on [cf0](https://cf0.ai), an AI real estate agency that lists homes to let and manages them. Owners save home drafts from chat. Firms hand Zero, cf0's AI agent, their follow-ups with tenants, guests and owners.
 
 ## Install
 
