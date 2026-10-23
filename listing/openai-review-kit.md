@@ -3,7 +3,7 @@
 What the ChatGPT plugin submission asks for, and why. The seven positive and five negative cases, countries and release notes are in `plugin.json`. The ZIP upload imports them. Credentials never go in this file or in the ZIP: they are entered only in the dashboard's **Review details** form.
 
 - Plugin: `cf0-zero`, display name "cf0 Zero", one MCP server at `https://api.cf0.ai/mcp`.
-- Tools: `ask_agent`, `give_agent_task`, `answer_agent`, `list_home`.
+- Tools: `ask_agent`, `give_agent_task`, `answer_agent`, `save_home_draft`.
 - Support page: https://cf0.ai/support#assistants
 
 ## Demo data the cases rely on
@@ -67,8 +67,8 @@ Seeded items on the board:
 ### P7. Create a lettings draft
 
 - **Prompt:** "List my 2-bed in Manchester, rent is £1,200 pcm"
-- **Tools triggered:** `list_home`
-- **Expected behaviour:** `list_home` stages a draft. `rent_owner_text` stays exactly "£1,200 pcm". The result names any missing details. cf0 does not publish the home.
+- **Tools triggered:** `save_home_draft`
+- **Expected behaviour:** `save_home_draft` stages a draft. `rent_owner_text` stays exactly "£1,200 pcm". The result names any missing details. cf0 does not publish the home.
 
 ## Negative test cases (5)
 
@@ -107,7 +107,7 @@ Seeded items on the board:
 | Tool | readOnlyHint | destructiveHint | openWorldHint | idempotentHint | Justification |
 |---|---|---|---|---|---|
 | `ask_agent` | true | false | false | true | Reads the signed-in user's own firm workspace in cf0 and writes nothing. Contacts no one. |
-| `list_home` | false | false | false | true | Stages or updates a draft. Reusing the same `request_id` returns the same draft. It does not publish a home. |
+| `save_home_draft` | false | true | false | true | Stages a draft, or replaces fields of a staged draft, so it is marked destructive. Reusing the same `request_id` returns the same draft. It does not publish a home. |
 | `give_agent_task` | false | true | true | false | Puts a task on the firm's board and leads to an email to one person outside the firm once approved. The same task given twice in a day returns the first, but the first call does create work. |
 | `answer_agent` | false | true | true | true | Approving releases an email to a person outside the firm and cannot be undone; cancelling stops a task. Bound to the version code the user was shown, so a repeat changes nothing. |
 

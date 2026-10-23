@@ -17,7 +17,7 @@ Every task stays on your firm's board in cf0, with a record of what Zero sent an
 ## What it does
 
 - **Ask Zero** (`ask_agent`, read-only): what Zero is handling, what is waiting on you, and where a task stands. It also reads your homes and their listing requirements. It changes nothing and contacts no one.
-- **Prepare a lettings draft** (`list_home`): write a draft home from the details the user gives. It never publishes the home.
+- **Save a home draft** (`save_home_draft`): write a draft home from the details the user gives. It never publishes the home.
 - **Give Zero a task** (`give_agent_task`): hand Zero one task about one person on your firm's records, or about someone new that you agree to add, such as arranging access with a tenant for a repair visit, confirming a check-out time with a guest or telling an owner about booked work. Zero drafts one email from your firm's own Zero mailbox and sends it only after someone at your firm approves it.
 - **Answer Zero** (`answer_agent`): approve or decline an ordinary email after a preview, answer a question Zero asked about your task, cancel a task, or approve or decline a home as the named admin approver after the listing checks pass.
 

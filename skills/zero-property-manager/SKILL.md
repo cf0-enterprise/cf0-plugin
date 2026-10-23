@@ -12,7 +12,7 @@ Zero is the AI employee of cf0. It lets and manages homes, and it does the follo
 | `ask_agent` | Reads Zero's board, homes and listing requirements | No. It contacts no one |
 | `give_agent_task` | Hands Zero one task about one person: someone on the firm's records, or someone new that the user agrees to add | Yes. Zero puts it on the board and drafts one email |
 | `answer_agent` | Approves or declines a proposed action or home, answers Zero's question, or cancels a task | Yes |
-| `list_home` | Writes a draft home for lettings on cf0 from what the user says | Yes. It writes a draft only. It never publishes |
+| `save_home_draft` | Writes a draft home for lettings on cf0 from what the user says | Yes. It writes a draft only. It never publishes |
 
 ## What the plugin covers
 
@@ -85,13 +85,13 @@ The result's `status`:
 ## Lettings: homes to let
 
 - Use `ask_agent` to read the user's homes on cf0, the status and the next step of each home, and what a home still needs before it can list. Pass `market` (for example `GB-ENG` for England) when the user asks what they need to list a home in a place. If the answer says "cf0 does not list there yet", tell the user that.
-- Use `list_home` when the user wants to let a home or add details to a draft. Pass `draft_id` from the last result to add to the same draft.
+- Use `save_home_draft` when the user wants to let a home or add details to a draft. Pass `draft_id` from the last result to add to the same draft.
 - Put the rent and the deposit in `rent_owner_text` and `deposit_owner_text` exactly as the user typed them. Never suggest, round, convert or compute a rent or a deposit. If the user did not give one, leave it out and ask the user.
-- If `list_home` refuses a deposit above the market cap, show the value, the cap and the rule as written. Do not offer a lower amount.
+- If `save_home_draft` refuses a deposit above the market cap, show the value, the cap and the rule as written. Do not offer a lower amount.
 - Some acts happen only on cf0.ai: the ownership proof, the photo rights, the lettings terms and the named approver. Show the `open_in_cf0` links for them. Do not say that a home is listed until `ask_agent` shows it as listed.
 - Never ask about a renter's children, age, benefits, nationality or immigration status. Neutral occupancy limits and other permitted tenant rules go in criteria on cf0.ai, not in facts.
 - "Approve and list" in `answer_agent` takes the user's own decision only. Show the ready home and its money first. Only the named admin approver can decide. A decline records the decision and leaves the home in draft.
-- Pass `request_id` when you call `list_home`. Reuse the same value if you retry. Pass any draft fields the user gives: `layout_name`, `private_label`, `available_from`, `min_term_months` and `timezone`. If the result includes `missing_details`, ask the user for those details.
+- Pass `request_id` when you call `save_home_draft`. Reuse the same value if you retry. Pass any draft fields the user gives: `layout_name`, `private_label`, `available_from`, `min_term_months` and `timezone`. If the result includes `missing_details`, ask the user for those details.
 
 ## Ground rules
 

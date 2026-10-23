@@ -44,7 +44,7 @@ On 2026-10-02 Luca emailed `mcp-review@anthropic.com` from luca@cf0.ai to ask wh
 
 **What users need before they connect:** a cf0 account as a member of a firm on cf0. Before Zero takes tasks, an admin sets up billing on cf0.ai (a firm on a cf0 contract skips this step), cf0 gives Zero an email address for the firm, and the team adds the people Zero emails. The phone line, WhatsApp and inbox come only with a cf0 contract.
 
-**Reads or writes:** both. `ask_agent` reads; `list_home`, `give_agent_task` and `answer_agent` write.
+**Reads or writes:** both. `ask_agent` reads; `save_home_draft`, `give_agent_task` and `answer_agent` write.
 
 **Authentication:** OAuth with client ID metadata documents (CIMD). The authorization server is Clerk at `https://clerk.cf0.ai`, named in the protected-resource metadata at `https://api.cf0.ai/.well-known/oauth-protected-resource/mcp`. Scopes: `openid email profile user:org:read offline_access`.
 
@@ -75,8 +75,8 @@ The expected results for prompts 1 to 5 are in `openai-review-kit.md` (P1 to P5)
 ### P7. Create a lettings draft
 
 - **Prompt:** "List my 2-bed in Manchester, rent is £1,200 pcm"
-- **Tools triggered:** `list_home`
-- **Expected behaviour:** `list_home` stages a draft. `rent_owner_text` stays exactly "£1,200 pcm". The result names any missing details. cf0 does not publish the home.
+- **Tools triggered:** `save_home_draft`
+- **Expected behaviour:** `save_home_draft` stages a draft. `rent_owner_text` stays exactly "£1,200 pcm". The result names any missing details. cf0 does not publish the home.
 
 ### N4. Do not suggest a rent
 

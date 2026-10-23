@@ -4,7 +4,7 @@ description: Walks a home owner through listing a home to let on cf0. The steps 
 license: MIT
 metadata:
   author: cf0
-  version: "1.4.2"
+  version: "1.4.4"
 ---
 
 # List my home on cf0
@@ -14,7 +14,7 @@ cf0 lets and manages homes. This skill takes an owner from "list my home" to a l
 | Tool | Use in this skill |
 |---|---|
 | `ask_agent` | Reads the owner's homes, the status and next step of each home, and what a market needs. It changes nothing. |
-| `list_home` | Adds or updates a home draft. It never publishes. |
+| `save_home_draft` | Adds or updates a home draft. It never publishes. |
 | `answer_agent` | Records the owner's "approve" or "decline" for a home that is ready. |
 | `give_agent_task` | After move-in, gives Zero management work for the home. Not for listing. |
 
@@ -60,7 +60,7 @@ Call `ask_agent` with no arguments.
   7. "Press 'Continue to your assistant'. If the page asks if your assistant can use your cf0 account, press Allow. Then come back here."
 
   Then call `ask_agent` again.
-- If the result has `status` `no_firm`, or `list_home` later returns `no_firm`: the sign-in has no cf0 account for homes yet. Give the `open_in_cf0` link. Tell the owner: "Type the town, press 'Start listing' and sign up with 'I own homes'. When the page asks about the home, come back here. I add the home with you." Then call `ask_agent` again.
+- If the result has `status` `no_firm`, or `save_home_draft` later returns `no_firm`: the sign-in has no cf0 account for homes yet. Give the `open_in_cf0` link. Tell the owner: "Type the town, press 'Start listing' and sign up with 'I own homes'. When the page asks about the home, come back here. I add the home with you." Then call `ask_agent` again.
 - If the answer has `homes`, show them in one short list (label, status, next step). Ask if the owner wants to continue one of them or add a new home. To continue a home, go to the first step that is not done.
 - A `needs_setup` answer about Zero setup (billing, mailbox, people) does not stop a listing. Continue.
 
@@ -76,7 +76,7 @@ Ask for the town and the country. Make the cf0 market code:
 Call `ask_agent` with `market` set to the code. Show the answer in one or two lines.
 
 - If the answer says that cf0 does not list there yet, try the country code alone. If that answer is the same, tell the owner that cf0 does not know this place yet, and give `https://cf0.ai/list`.
-- If `list_home` later returns a refusal with the reason `market_not_found`, try the country code alone. If that also fails, tell the owner that cf0 does not know this place yet, and give `https://cf0.ai/list`.
+- If `save_home_draft` later returns a refusal with the reason `market_not_found`, try the country code alone. If that also fails, tell the owner that cf0 does not know this place yet, and give `https://cf0.ai/list`.
 
 ### The home
 
@@ -98,13 +98,13 @@ Use the time zone of the town, for example `Europe/London`, `Europe/Madrid` or `
 
 ### Save the draft
 
-Call `list_home` with a new `request_id` (for example a short random string) and every field you have: `market`, `city`, `building_name`, `address_line`, `private_label`, `bedrooms`, `bathrooms`, `furnished`, `available_from`, `min_term_months`, `timezone`, `facts`, `rent_owner_text`, `deposit_owner_text`, and `deposit_shown` when the owner said no in question 9.
+Call `save_home_draft` with a new `request_id` (for example a short random string) and every field you have: `market`, `city`, `building_name`, `address_line`, `private_label`, `bedrooms`, `bathrooms`, `furnished`, `available_from`, `min_term_months`, `timezone`, `facts`, `rent_owner_text`, `deposit_owner_text`, and `deposit_shown` when the owner said no in question 9.
 
-Keep the `draft_id` and the `open_in_cf0` links from the result. To add or change a detail later, call `list_home` with that `draft_id` and only the new fields. On a retry of the same call, use the same `request_id`.
+Keep the `draft_id` and the `open_in_cf0` links from the result. To add or change a detail later, call `save_home_draft` with that `draft_id` and only the new fields. On a retry of the same call, use the same `request_id`.
 
 The result `status`:
 
-- `staged`: the draft is saved. Ask the owner for each item in `missing_details`, then call `list_home` again with the `draft_id`. An item with a dot names the `list_home` field with an underscore, for example `layout.name` is `layout_name`. When `missing_details` is empty, the draft has the rent and the deposit, and the result has no `unread_money`, go to step 3. `missing` always has `rent_and_deposit` and `photo_rights` for a draft. That is correct, because the photo page adds them.
+- `staged`: the draft is saved. Ask the owner for each item in `missing_details`, then call `save_home_draft` again with the `draft_id`. An item with a dot names the `save_home_draft` field with an underscore, for example `layout.name` is `layout_name`. When `missing_details` is empty, the draft has the rent and the deposit, and the result has no `unread_money`, go to step 3. `missing` always has `rent_and_deposit` and `photo_rights` for a draft. That is correct, because the photo page adds them.
 - `refused` with a deposit refusal: show the `value`, the `cap`, the `currency` and the `rule` as the result gives them. Ask the owner for a new deposit. Do not offer one.
 - `unread_money` in the result: cf0 could not read that amount. Ask the owner to type it again, for example with the currency.
 - `no_firm`: see step 1.
@@ -113,7 +113,7 @@ The result `status`:
 
 ## Step 3: The photos
 
-Give the `photo_rights` link from the last `list_home` result. Tell the owner:
+Give the `photo_rights` link from the last `save_home_draft` result. Tell the owner:
 
 1. "Open the link on the device that has the photos. Sign in with the same cf0 account."
 2. "If the page shows the details of the home, check them. The rent and the deposit are already there. Press 'Add the home'."
