@@ -37,8 +37,6 @@ On 2026-10-02 Luca emailed `mcp-review@anthropic.com` from luca@cf0.ai to ask wh
 > Manage homes: give Zero a follow-up about one person on your records, for example access for a repair with a tenant, a check-out time with a guest, or booked work for an owner. Zero drafts an email from your Zero mailbox. You preview and approve it, in Claude or on cf0.ai, before Zero sends it. Zero reads the reply and closes the task when the person confirms. When a reply needs your decision, Zero asks you first.
 >
 > Ask Zero what it is handling, what waits on you, where a task stands and where each home stands. Reading changes nothing and contacts no one.
->
-> Limits: from chat, Zero contacts people by email only and never takes a phone number. The task tool does not do leads, cold outreach, marketing, tenant screening, rent collection, payments, legal notices or emergencies. People appear as reference codes with their role, and their contact details and access codes stay hidden. Zero adds a new person only after you agree to their name, email, role and property. Messages to 10 or more people, documents and sensitive content are approved only on cf0.ai. You need a cf0 account.
 
 **Use cases:** checking what Zero is doing and what waits on you; preparing a lettings draft from details the user provides; handing Zero maintenance and access, move-out and turnover, owner update and stay operation tasks; adding a person to the firm's records after the user agrees; approving Zero's emails and ready homes; answering Zero's questions; cancelling tasks.
 
