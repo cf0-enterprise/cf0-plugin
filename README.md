@@ -6,7 +6,7 @@ cf0 Zero connects Claude, ChatGPT or Codex to your account on [cf0](https://cf0.
 
 - **Claude Code:** Run `/plugin marketplace add cf0-enterprise/cf0-zero`. Then run `/plugin install cf0-zero@cf0`.
 - **Claude app:** Select Customize > Connectors, then + > Add custom connector. Name it `cf0`, enter `https://api.cf0.ai/mcp`, press Continue, then Add. To add the skill, turn on Settings > Capabilities > Code execution. Then select Customize > Skills, then + > Upload a skill, and choose the [list-my-home skill](https://cf0.ai/skills/list-my-home.zip).
-- **ChatGPT:** Zero is not in the ChatGPT app directory yet. Turn on Developer mode in Settings > Apps & Connectors > Advanced settings. Press Create. Name it `cf0`, enter `https://api.cf0.ai/mcp` and choose OAuth. In a new chat, press + and turn on cf0 under Developer mode. ChatGPT skills work only in Business and Enterprise workspaces. To list a home in any other workspace, paste the prompt from [cf0.ai/list/assistant](https://cf0.ai/list/assistant).
+- **ChatGPT:** cf0 Zero is not in the ChatGPT plugin directory yet. Open Plugins, press Add, then Add custom MCP server. Name it `cf0`, enter `https://api.cf0.ai/mcp`, keep OAuth, tick the box and press Create as a plugin. Then press Connect cf0 and sign in to cf0. ChatGPT skills work only in Business and Enterprise workspaces. To list a home in any other workspace, paste the prompt from [cf0.ai/list/assistant](https://cf0.ai/list/assistant).
 
 ## How it works
 
