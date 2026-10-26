@@ -34,6 +34,7 @@ People on your firm's records appear as reference codes such as `p_k7mq2xrb4a` w
 | `assets/` | Zero logos and composer icons, light and dark |
 | `listing/` | Directory submission material; not loaded by the plugin |
 | `scripts/` | Repository checks; not loaded by the plugin |
+| `AGENTS.md` | Instructions for AI coding agents that change this repository |
 
 Listing checks exclude review cases. These cases can contain rent that the owner provides.
 
