@@ -58,6 +58,19 @@ The result's `status` says what happened:
 - `needs_setup` or `limit_reached`: the firm has something to finish on cf0.ai. Show the `reason` and the `open_in_cf0` link.
 - `try_again`: Zero could not take the task just now. Offer to try again in a minute.
 
+## Optional 3D floor plan
+
+When an owner asks for a 3D plan of a home on cf0, use `give_agent_task` with `task`, `property` and optional `floor_plan`. This starts a plan run, not an email task. Do not send `people`, `new_person` or `confirm_code` with it. Only a firm admin can start the run.
+
+- `property`: the home's label in the firm, or its unit id. If a label names more than one home, ask for the unit id.
+- `floor_plan.filename`: the file name, with its extension.
+- `floor_plan.mime`: the file's MIME type, for example `application/dxf`, `application/pdf` or `image/jpeg`.
+- Send one of `floor_plan.file_url` (a public HTTPS file URL) or `floor_plan.file_base64` (the file as base64). Do not send both. The file must not exceed 20 MB.
+
+DXF, PDF, JPEG, PNG and WebP are accepted. DWG is not supported yet. Ask the owner to export DWG as DXF, PDF or an image. Send a file only after the owner confirms that they drew it or have the right to use it. Use the home's wide room photos already on cf0; do not add them to `floor_plan`.
+
+On `accepted`, show the `reason` and the `open_in_cf0` link. The owner opens the link, answers a question if needed, reviews the rooms and photos, and publishes in cf0 only after they confirm that the 3D plan matches the drawing. The assistant and the plan agent do not publish. This step is optional and does not stop the home from listing. On another status, show the `reason`. Do not say that the run started.
+
 ## Answering Zero
 
 Use `answer_agent` only for an item the user has seen in Zero's latest answer, and only with the decision the user stated.

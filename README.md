@@ -58,6 +58,12 @@ You need a cf0 account as a member of a firm on cf0. Before Zero takes tasks, an
 
 Setup steps for each assistant are at [cf0.ai/support](https://cf0.ai/support#assistants).
 
+## Optional 3D floor plan
+
+`give_agent_task` accepts optional `floor_plan` for the home in `property`. Send `filename`, `mime`, and one of `file_url` (public HTTPS) or `file_base64`. The file must not exceed 20 MB. DXF, PDF and images (JPEG, PNG or WebP) are accepted. DWG is not supported yet.
+
+Only a firm admin can start the run. The owner must have the right to use the drawing. The result has an `open_in_cf0` link. The owner reviews and publishes the plan in cf0. The assistant does not publish it. This optional step does not stop the home from listing. See `skills/zero-property-manager/SKILL.md` for the field details.
+
 ## Privacy and terms
 
 - Privacy policy: [cf0.ai/privacy](https://cf0.ai/privacy)
