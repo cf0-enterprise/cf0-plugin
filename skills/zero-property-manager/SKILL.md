@@ -10,7 +10,7 @@ Zero is the AI employee of cf0. It lets and manages homes, and it does the follo
 | Tool | What it does | Changes anything? |
 |---|---|---|
 | `ask_agent` | Reads Zero's board, homes and listing requirements | No. It contacts no one |
-| `give_agent_task` | Hands Zero one task about one person: someone on the firm's records, or someone new that the user agrees to add | Yes. Zero puts it on the board and drafts one email |
+| `give_agent_task` | Hands Zero one email task about one person, or a floor-plan run for one home | Yes. Zero drafts an email for approval, or prepares a plan for review |
 | `answer_agent` | Approves or declines a proposed action or home, answers Zero's question, or cancels a task | Yes |
 | `save_home_draft` | Writes a draft home for lettings on cf0 from what the user says | Yes. It writes a draft only. It never publishes |
 
@@ -32,9 +32,9 @@ People on the firm's records appear as reference codes such as `p_k7mq2xrb4a`, w
 
 Each item in the answer carries an item id and a version code. Keep them: `answer_agent` needs both, taken from Zero's latest answer.
 
-## Handing Zero a task
+## Handing Zero an email task
 
-Use `give_agent_task` when the user wants Zero to do something with one person.
+Use `give_agent_task` when the user wants Zero to send an email to one person.
 
 - `task`: what the user wants done and what counts as done, as they would tell a colleague.
 - `people`: exactly one entry, the person's name as the firm's records have it or a `p_` code from an earlier answer. Never a phone number or email address.
@@ -45,7 +45,7 @@ Use `give_agent_task` when the user wants Zero to do something with one person.
 
 If the user names someone only by email address, ask for their name on the firm's records. If they are not on the records, offer to add them with `new_person`.
 
-`give_agent_task` takes four kinds of work: maintenance and access, move-out and turnover, owner updates, and stay operations. It does not take leasing, leads, cold outreach, marketing, tenant screening, rent or arrears, payments, legal notices or emergencies. If the user's request is one of those, tell them `give_agent_task` does not take it rather than rewording it to fit. In an emergency, tell the user to call the emergency services and their firm's emergency line now.
+For email tasks, `give_agent_task` takes four kinds of work: maintenance and access, move-out and turnover, owner updates, and stay operations. It does not take leasing, leads, cold outreach, marketing, tenant screening, rent or arrears, payments, legal notices or emergencies. If the user's request is one of those, tell them `give_agent_task` does not take it rather than rewording it to fit. In an emergency, tell the user to call the emergency services and their firm's emergency line now.
 
 For work involving several people, give one task per person. Giving the same task again on the same day returns the first task.
 

@@ -1,7 +1,7 @@
 {
   "name": "cf0-zero",
   "displayName": "cf0 Zero",
-  "version": "1.4.10",
+  "version": "1.4.11",
   "description": "cf0 is an AI real estate agency. List a home to let on cf0 from chat, and hand Zero, cf0's agent, the email follow-ups with tenants, guests and owners. You approve each email before it goes out.",
   "author": {
     "name": "cf0",
