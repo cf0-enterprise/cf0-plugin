@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "cf0-zero",
-  "version": "1.4.9",
+  "version": "1.4.10",
   "description": "cf0 is an AI real estate agency. List a home to let on cf0 from chat, and hand Zero, cf0's agent, the email follow-ups with tenants, guests and owners. You approve each email before it goes out.",
   "author": {
     "name": "cf0",

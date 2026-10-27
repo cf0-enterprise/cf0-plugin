@@ -67,9 +67,13 @@ When an owner asks for a 3D plan of a home on cf0, use `give_agent_task` with `t
 - `floor_plan.mime`: the file's MIME type, for example `application/dxf`, `application/pdf` or `image/jpeg`.
 - Send one of `floor_plan.file_url` (a public HTTPS file URL) or `floor_plan.file_base64` (the file as base64). Do not send both. The file must not exceed 20 MB.
 
-DXF, PDF, JPEG, PNG and WebP are accepted. DWG is not supported yet. Ask the owner to export DWG as DXF, PDF or an image. Send a file only after the owner confirms that they drew it or have the right to use it. Use the home's wide room photos already on cf0; do not add them to `floor_plan`.
+The tool accepts DXF, PDF, JPEG, PNG and WebP. DWG is not supported yet. Ask the owner to export DWG as DXF, PDF or an image. Send a file only after the owner confirms that they drew it or have the right to use it.
 
-On `accepted`, show the `reason` and the `open_in_cf0` link. The owner opens the link, answers a question if needed, reviews the rooms and photos, and publishes in cf0 only after they confirm that the 3D plan matches the drawing. The assistant and the plan agent do not publish. This step is optional and does not stop the home from listing. On another status, show the `reason`. Do not say that the run started.
+Use the home's wide room photos already on cf0. Do not add them to `floor_plan`.
+
+On `accepted`, show the `reason` and the `open_in_cf0` link. The owner opens the link and answers a question if needed. The owner reviews the rooms and photos in cf0. The owner must confirm that the 3D plan matches the drawing before they publish it.
+
+The assistant and the plan agent do not publish. This step is optional and does not stop the home from listing. On another status, show the `reason`. Do not say that the run started.
 
 ## Answering Zero
 
