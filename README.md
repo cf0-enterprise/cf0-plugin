@@ -30,7 +30,7 @@ People on your firm's records appear as reference codes such as `p_k7mq2xrb4a` w
 | `plugin.json`, `mcp.json` | Agent Plugins manifest and MCP server for ChatGPT and Codex |
 | `.claude-plugin/plugin.json`, `.mcp.json` | Plugin manifest and MCP server for Claude |
 | `skills/zero-property-manager/SKILL.md` | How your assistant works with Zero, using the four tools |
-| `skills/list-my-home/SKILL.md` | Walks the owner through a cf0 account, the home facts with the rent and the deposit, the photos and an optional Polycam 3D scan. Then it names the steps on cf0.ai before the home goes live: the ownership proof, the lettings terms and the approval. |
+| `skills/list-my-home/SKILL.md` | Walks the owner through a cf0 account, the home facts with the rent and the deposit, the photos and the floor plan. Then it names the steps on cf0.ai before the home goes live: the ownership proof, the lettings terms and the approval. |
 | `assets/` | Zero logos and composer icons, light and dark |
 | `listing/` | Directory submission material; not loaded by the plugin |
 | `scripts/` | Repository checks; not loaded by the plugin |

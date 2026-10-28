@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "cf0-zero",
-  "version": "1.4.11",
+  "version": "1.4.12",
   "description": "cf0 is an AI real estate agency. List a home to let on cf0 from chat, and hand Zero, cf0's agent, the email follow-ups with tenants, guests and owners. You approve each email before it goes out.",
   "author": {
     "name": "cf0",
@@ -25,7 +25,7 @@
       "interface": {
         "displayName": "cf0 Zero",
         "shortDescription": "List, let and manage homes",
-        "longDescription": "cf0 is an AI real estate agency. It lists homes to let, finds tenants and manages the homes after a tenant moves in. Zero is cf0's AI agent. This plugin connects ChatGPT to your cf0 account. It is for home owners, and for property management, lettings and short-term rental firms.\n\nList a home: tell Zero about your home in chat, and Zero saves a draft on cf0 from the details you give. Rent and deposit stay in your own words, and Zero never suggests a rent. You can read what a market needs before a home can list. Photos, the ownership proof and the lettings terms are added on cf0.ai, plus a 3D floor plan from a phone scan if you want one. Saving a draft never publishes it. A home goes live only after cf0 checks the proof and you approve it, on cf0.ai or in chat.\n\nManage homes: give Zero a follow-up about one person on your records, for example access for a repair with a tenant, a check-out time with a guest, or booked work for an owner. Zero drafts an email from your Zero mailbox. You preview and approve it, in ChatGPT or on cf0.ai, before Zero sends it. Zero reads the reply and closes the task when the person confirms. When a reply needs your decision, Zero asks you first.\n\nAsk Zero what it is handling, what waits on you, where a task stands and where each home stands. Reading changes nothing and contacts no one.",
+        "longDescription": "cf0 is an AI real estate agency. It lists homes to let, finds tenants and manages the homes after a tenant moves in. Zero is cf0's AI agent. This plugin connects ChatGPT to your cf0 account. It is for home owners, and for property management, lettings and short-term rental firms.\n\nList a home: tell Zero about your home in chat, and Zero saves a draft on cf0 from the details you give. Rent and deposit stay in your own words, and Zero never suggests a rent. You can read what a market needs before a home can list. Photos, the 2D floor plan, the ownership proof and the lettings terms are added on cf0.ai. cf0 builds the 3D floor plan from the plan and the photos. Saving a draft never publishes it. A home goes live only after cf0 checks the proof and you approve it, on cf0.ai or in chat.\n\nManage homes: give Zero a follow-up about one person on your records, for example access for a repair with a tenant, a check-out time with a guest, or booked work for an owner. Zero drafts an email from your Zero mailbox. You preview and approve it, in ChatGPT or on cf0.ai, before Zero sends it. Zero reads the reply and closes the task when the person confirms. When a reply needs your decision, Zero asks you first.\n\nAsk Zero what it is handling, what waits on you, where a task stands and where each home stands. Reading changes nothing and contacts no one.",
         "developerName": "cf0",
         "category": "Productivity",
         "capabilities": [
@@ -148,7 +148,7 @@
           "KR",
           "TH"
         ],
-        "release_notes": "Version 1.4.11 adds the optional floor_plan field to give_agent_task. Send a DXF, PDF or image for one home. The owner reviews and publishes the 3D plan in cf0. DWG is not supported yet. Email tasks keep their existing limits."
+        "release_notes": "Version 1.4.12 says that cf0 builds the 3D floor plan from the owner's 2D plan and photos, with no phone scan. Version 1.4.11 added the optional floor_plan field to give_agent_task. Send a DXF, PDF or image for one home. The owner reviews and publishes the 3D plan in cf0. DWG is not supported yet. Email tasks keep their existing limits."
       }
     }
   }
