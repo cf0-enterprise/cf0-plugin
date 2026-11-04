@@ -34,7 +34,7 @@ On 2026-10-02 Luca emailed `mcp-review@anthropic.com` from luca@cf0.ai to ask wh
 >
 > List a home: tell Zero about your home in chat, and Zero saves a draft on cf0 from the details you give. Rent and deposit stay in your own words, and Zero never suggests a rent. You can read what a market needs before a home can list. Photos, the 2D floor plan, the ownership proof and the lettings terms are added on cf0.ai. cf0 builds the 3D floor plan from the plan and the photos. Saving a draft never publishes it. A home goes live only after cf0 checks the proof and you approve it, on cf0.ai or in chat.
 >
-> Manage homes: give Zero a follow-up about one person on your records, for example access for a repair with a tenant, a check-out time with a guest, or booked work for an owner. Zero drafts an email from your Zero mailbox. You preview and approve it, in Claude or on cf0.ai, before Zero sends it. Zero reads the reply and closes the task when the person confirms. When a reply needs your decision, Zero asks you first.
+> Manage homes: give Zero a follow-up about one person on your records, for example access for a repair with a tenant, a check-out time with a guest, booked work for an owner, renewal terms for a tenant, or a reminder of late rent. Zero drafts an email from your Zero mailbox. You preview and approve it, in Claude or on cf0.ai, before Zero sends it. Zero reads the reply and closes the task when the person confirms. When a reply needs your decision, Zero asks you first.
 >
 > Ask Zero what it is handling, what waits on you, where a task stands and where each home stands. Reading changes nothing and contacts no one.
 

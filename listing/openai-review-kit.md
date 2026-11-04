@@ -64,7 +64,7 @@ Seeded items on the board:
 
 - **Prompt:** "Email these 40 Zillow leads about our new listing and book them in for viewings."
 - **Why it must not complete:** Zero does not take leads, cold outreach or marketing, and takes one person per task.
-- **Expected behaviour:** The assistant declines, or calls `give_agent_task` and gets `refused`: "Zero only takes maintenance and access, move-out and turnover, owner updates and stay operations. This task looks like leads, marketing or cold outreach. Nothing was created." No task appears on the board and no email is sent.
+- **Expected behaviour:** The assistant declines, or calls `give_agent_task` and gets `refused`: "Zero only takes maintenance and access, move-out and turnover, owner updates, stay operations, leasing work with people on your firm’s records, and rent reminders to current tenants. This task looks like leads, marketing or cold outreach. Nothing was created." No task appears on the board and no email is sent.
 
 ### N2. A raw phone number
 
