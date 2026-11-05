@@ -11,7 +11,7 @@ Credentials never go in this file. They are entered only in the portal's **Test 
 
 The Anthropic Software Directory Policy, section 4.B, excludes software that uses AI models to generate audio, and section 4 opens "Unless otherwise expressly permitted by us in writing". Zero's product includes AI voice calls on cf0's own phone lines, though nothing in this plugin generates audio.
 
-On 2026-10-02 Luca emailed `mcp-review@anthropic.com` from luca@cf0.ai to ask whether that is permitted (founder decision L3). Until Anthropic answers in writing, the Claude door stays text-only: the four tools return text and structured data, and no tool starts, places or returns a call or any audio. Mention the open request in the submission notes so the reviewer has the context.
+On 2026-10-02 Luca emailed `mcp-review@anthropic.com` from luca@cf0.ai to ask whether that is permitted (founder decision L3). Until Anthropic answers in writing, the Claude door stays text-only: the tools return text and structured data, and no tool starts, places or returns a call or any audio. Mention the open request in the submission notes so the reviewer has the context.
 
 ## Connector listing fields
 
@@ -95,7 +95,7 @@ The expected results for prompts 1 to 4 are in `openai-review-kit.md` as P1 to P
 - **Sign-in:** https://cf0.ai/login with email and password. No MFA, no email or SMS code, no magic link. Cloudflare may show a "Verify you are human" box after the email; a person ticks it.
 - **Steps for the reviewer:** in Claude, open Customize, then Connectors, choose Add custom connector and paste `https://api.cf0.ai/mcp` (or add Zero from the directory once it is listed). Sign in with the test account, choose cf0 Demo Lettings on the consent screen if asked, then try the example prompts.
 - **Where credentials live:** only in the Test & launch step. Louis rotates the password after each review.
-- **Tools run before submitting:** confirm each of the four tools ran from a Claude conversation against the demo firm, as the Test & launch step asks.
+- **Tools run before submitting:** confirm each of the eight tools ran from a Claude conversation against the demo firm, as the Test & launch step asks.
 
 ## Connector compliance: the seven acknowledgements
 

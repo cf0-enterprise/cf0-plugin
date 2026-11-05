@@ -19,7 +19,7 @@ This repository is the cf0 Zero plugin for Claude, ChatGPT and Codex. It has no 
 2. Keep the version the same in `plugin.json`, `.claude-plugin/plugin.json` and `.claude-plugin/marketplace.json`. Increase it in all three files for each change to a manifest or a skill.
 3. Run `scripts/check-no-price.sh` before each commit. The listing text names no price, trial or discount.
 4. A skill never tells the assistant to suggest a rent or a deposit. The owner types these values.
-5. A tool name or a tool behavior comes from the cf0 MCP server. Do not describe a tool that the server does not have. The current tools are `ask_agent`, `save_home_draft`, `import_listings`, `answer_agent` and `give_agent_task`.
+5. A tool name or a tool behavior comes from the cf0 MCP server. Do not describe a tool that the server does not have. The current tools are `ask_agent`, `give_agent_task`, `answer_agent`, `save_home_draft`, `import_listings`, `add_home_files`, `manage_renter` and `set_up_agent`.
 6. Write in plain English: short sentences, one name for one thing, no marketing adjectives.
 
 ## Test a change
